@@ -16,7 +16,7 @@
         @routes
         <script src="{{ mix('js/app.js') }}" defer></script>
 
-        <script src="{{ mix('js/index.min.js') }}" defer></script>
+        <script src="{{ mix('js/index.min.js') }}" ></script>
 
     </head>
     <body class="font-sans antialiased">

@@ -47,12 +47,17 @@
                                     </jet-dropdown-link>
 
                                     <div class="border-t border-gray-100"></div>
-                                    <jet-dropdown-link :href="route('role.index')"  :active="route().current('role.*')">
+                                    <jet-dropdown-link :href="route('assignment.index')"  :active="route().current('assignment.*')">
                                       Assignment
                                     </jet-dropdown-link>
 
                                     <div class="border-t border-gray-100"></div>
-                                    <jet-dropdown-link :href="route('role.index')"  :active="route().current('role.*')">
+                                    <jet-dropdown-link :href="route('wfassignment.index')"  :active="route().current('wfassignment.*')">
+                                      Active Assignment
+                                    </jet-dropdown-link>
+
+                                    <div class="border-t border-gray-100"></div>
+                                    <jet-dropdown-link :href="route('wfassignment.index')"  :active="route().current('wfassignment.*')">
                                       List Of Value
                                     </jet-dropdown-link>
 
@@ -97,8 +102,46 @@
                                     </jet-dropdown-link>
 
                                     <div class="border-t border-gray-100"></div>
+                                    <jet-dropdown-link :href="route('doa.create')"  :active="route().current('role.*')">
+                                      Personal TimeSheet
+                                    </jet-dropdown-link>
+
+                                    <div class="border-t border-gray-100"></div>
                                     <jet-dropdown-link :href="route('orgchart')"  :active="route().current('orgchart')">
                                       Organization Chart
+                                    </jet-dropdown-link>
+
+                                  </template>
+                                </jet-dropdown>
+                                <!-- end Pegawai dropdown -->
+
+                                <!-- start Pegawai dropdown -->
+                                <jet-dropdown :class="getDataPegawaiIsActive">
+                                  <template #trigger>
+                                    <button class="pt-0 pb-5">
+                                      Personal TimeSheet
+                                    </button>
+                                  </template>
+
+                                  <template #content>
+                                    <!-- Account Management -->
+                                    <div class="block px-4 py-2 text-xs text-gray-400">
+                                      Manage All Employee TimeSheet Data
+                                    </div>
+
+                                    <div class="border-t border-gray-100"></div>
+                                    <jet-dropdown-link :href="route('timesheet.create')" :active="route().current('timesheet.*')">
+                                      Create TimeSheet
+                                    </jet-dropdown-link>
+
+                                    <div class="border-t border-gray-100"></div>
+                                    <jet-dropdown-link :href="route('absenrsc.index')" :active="route().current('absenrsc.index')">
+                                      List Personal Timesheet
+                                    </jet-dropdown-link>
+
+                                    <div class="border-t border-gray-100"></div>
+                                    <jet-dropdown-link :href="route('role.index')"  :active="route().current('role.*')">
+                                      All TimeSheet
                                     </jet-dropdown-link>
 
                                   </template>
@@ -108,8 +151,8 @@
                                 <jet-nav-link :href="route('absenrsc.create')" :active="route().current('absenrsc.create')">
                                   Absen
                                 </jet-nav-link>
-                                <jet-nav-link :href="route('dashboard')" :active="route().current('role.*')">
-                                  Payroll
+                                <jet-nav-link :href="route('applicant.index')" :active="route().current('applicant.*')">
+                                  Recruitment
                                 </jet-nav-link>
                             </div>
 

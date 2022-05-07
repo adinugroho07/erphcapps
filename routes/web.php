@@ -1,12 +1,18 @@
 <?php
 
 use App\Http\Controllers\AbsenController;
+use App\Http\Controllers\ApplicantController;
+use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\DoaController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TimesheetController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WfassignmentController;
+use App\Models\Wfassignment;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -31,10 +37,38 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+
+    $assignment = Wfassignment::where('assignpersonid',Auth::id())->where('assignstatus', 'ACTIVE')->get();
+    return Inertia::render('Dashboard',[
+        'assignment' => $assignment
+    ]);
 })->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->resource('users', UserController::class);
+
+Route::middleware(['auth:sanctum', 'verified'])->group(function(){
+    //pada method resource('nama path nya','controller class'). pada parameter ke dua expect nya string bukan array.
+    Route::resource('applicant', ApplicantController::class);
+    Route::post('applicant/search', [ApplicantController::class, 'search'])->name('searchapplicant');
+});
+
+
+Route::middleware(['auth:sanctum', 'verified'])->group(function(){
+    Route::resource('assignment',AssignmentController::class);
+    Route::resource('wfassignment',WfassignmentController::class);
+    Route::resource('timesheet',TimesheetController::class);
+});
+
+//approval URL
+Route::middleware(['auth:sanctum', 'verified'])->group(function(){
+    Route::get('/assignment/{id}/applicant/approval',[ApplicantController::class, 'showApprovalPage']);
+    Route::get('/assignment/{id}/timesheet/approval',[TimesheetController::class, 'showApprovalPage']);
+    Route::post('/assignment/applicant/approval',[ApplicantController::class, 'storeApproval'])->name('applicant.approve');
+
+    //Route::get('/assignment/{id}/asdasd/approval',[ApplicantController::class, 'showApprovalPage']);
+    //Route::post('/assignment/asdasd/approval',[ApplicantController::class, 'storeApproval']);
+
+});
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     //pada method resource('nama path nya','controller class'). pada parameter ke dua expect nya string bukan array.

@@ -17,6 +17,87 @@
             </div>
         </div>
 
+        <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
+          <div class="mt-8 text-2xl">
+            This Is Assignment That Needs Your Approval.
+          </div>
+
+          <div class="mt-6 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+              <tr>
+
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  No
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Description
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Employee Name
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Created At
+                </th>
+                <th scope="col" class="relative px-6 py-3">
+                  <span class="sr-only">Edit</span>
+                </th>
+              </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+              <tr v-for="(assgn, index) in assignment" :key="assgn.id">
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-gray-900">
+                    {{ index+1 }}
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-gray-900">
+                    {{ assgn.description }}
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-gray-900">
+                    {{assgn.assignperson}}
+                  </div>
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                >
+                  {{ assgn.created_at }}
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                >
+                  <Link :href="assgn.link">
+                    <jet-button
+                      class="mr-1 bg-cyan-500 hover:bg-cyan-600"
+                      title="Go To Module"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z" />
+                      </svg>
+                    </jet-button>
+                  </Link>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
         <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2">
             <div class="p-6">
                 <div class="flex items-center">
@@ -96,10 +177,23 @@
 <script>
     import { defineComponent } from 'vue'
     import JetApplicationLogo from '@/Jetstream/ApplicationLogo.vue'
+    import { Link } from "@inertiajs/inertia-vue3";
+    import JetButton from "@/Jetstream/Button";
+    import JetLabel from '@/Jetstream/Label.vue';
+    import JetInput from '@/Jetstream/Input.vue';
+    import Pagination from '@/Jetstream/PaginationAction';
+    import JetDialogModal from "@/Jetstream/DialogModal";
 
     export default defineComponent({
+        props:['assignment'],
         components: {
             JetApplicationLogo,
+            Link,
+            JetButton,
+            Pagination,
+            JetDialogModal,
+            JetLabel,
+            JetInput
         },
     })
 </script>

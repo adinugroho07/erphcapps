@@ -90,6 +90,7 @@ class PegawaiController extends Controller
         $request->validate([
             'name' =>  ['required', 'max:150'],
             'email' =>  ['required', 'max:50'],
+            'nik' =>  ['required', 'max:200'],
             'suppervisor' =>  [ 'max:225'],
             'suppervisor_posname' =>  [ 'max:225'] ,
             'position_category' =>  ['required', 'max:50'] ,

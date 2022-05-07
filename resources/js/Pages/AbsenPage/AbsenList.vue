@@ -67,62 +67,12 @@
               </tbody>
             </table>
           </div>
-            <div>
-              <pagination class="mt-6" :links="absenlist.links" />
-            </div>
+          <div>
+            <pagination class="mt-6" :links="absenlist.links" />
+          </div>
         </div>
       </div>
     </div>
-    <jet-dialog-modal :show="show">
-      <template #title>
-        <div class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
-          <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalLabel">View Acivity</h5>
-        </div>
-      </template>
-      <template #content>
-        <div class="modal-body relative p-4">
-
-          <!-- Name -->
-          <div class="">
-            <jet-label for="name" value="Name" class="text-lg"/>
-            <jet-input id="name" type="text" class="mt-1 block w-full" v-model="modalValue.name" autocomplete="name" disabled/>
-          </div>
-
-          <!-- Email -->
-          <div class="mt-2">
-            <jet-label for="email" value="Email" class="text-lg"/>
-            <jet-input id="email" type="email" class="mt-1 block w-full" v-model="modalValue.email" disabled/>
-          </div>
-
-          <!-- absentype -->
-          <div class="mt-2">
-            <jet-label for="absentype" value="Absen Type" class="text-lg"/>
-            <jet-input id="absentype" type="text" class="mt-1 block w-full" v-model="modalValue.absentype" disabled/>
-          </div>
-
-          <!-- tappingtime -->
-          <div class="mt-2">
-            <jet-label for="tapping" value="Tapping Time" class="text-lg"/>
-            <jet-input id="tapping" type="text" class="mt-1 block w-full" v-model="modalValue.tappingtime" disabled/>
-          </div>
-
-          <!-- Activity -->
-          <div class="mt-2">
-            <jet-label for="activiy" value="Daily Activities" class="text-lg"/>
-            <textarea id="activiy" v-model="modalValue.activity" disabled placeholder="meeting with someone" rows="6" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" ></textarea>
-          </div>
-
-        </div>
-      </template>
-      <template #footer>
-        <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-          <button @click="close" type="button" class="px-6 py-2.5 overflow-auto bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out" data-bs-dismiss="modal">
-            Close
-          </button>
-        </div>
-      </template>
-    </jet-dialog-modal>
-
   </app-layout>
 </template>
 

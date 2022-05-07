@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('applicant', function (Blueprint $table) {
             $table->id();
+            //data workflow
+            $table->string('status',150);
+            $table->boolean('isedit')->default(true);
             //data pribadi
             $table->string('name',150);
             $table->string('email')->unique();
@@ -47,6 +50,16 @@ return new class extends Migration
             //lampiran
             $table->string('ijazah', 2048)->nullable();
             $table->string('cv', 2048)->nullable();
+            //approval and note
+            $table->string('interviewer',250);
+            $table->integer('idintvw',false);
+            $table->string('appr1',250);
+            $table->integer('idappr1',false);
+            $table->string('appr2',250);
+            $table->integer('idappr2',false);
+            $table->text('interviewnote')->nullable();
+            $table->text('apprlvl1note')->nullable();
+            $table->text('apprlvl2note')->nullable();
             $table->timestamps();
         });
     }

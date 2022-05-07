@@ -196,6 +196,15 @@
                 <jet-input id="emaild1" type="email" class="mt-2 block w-full" v-model="form.email" disabled/>
               </div>
 
+              <!-- Nik -->
+              <div class="col-span-6 sm:col-span-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <jet-label for="nik" value="Nik" class="font-semibold text-base"/>
+                <jet-input id="nik" type="text" class="mt-2 block w-full" v-model="form.nik" disabled/>
+              </div>
+
               <!-- Department -->
               <div class="col-span-6 sm:col-span-3">
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -538,6 +547,7 @@ export default defineComponent({
       form: this.$inertia.form({
         name: this.userdetail.name,
         email: this.userdetail.email,
+        nik: this.userdetail.nik,
         profile_photo_path: this.userdetail.profile_photo_path,
         profile_photo_url: this.userdetail.profile_photo_url,
         department: this.userdetail.department,
