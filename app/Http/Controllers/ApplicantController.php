@@ -49,7 +49,7 @@ class ApplicantController extends Controller
         $setCodeApplicant = '';
         if($codeapplicant){
             //if not null then
-            $setCodeApplicant = 'APLCNT'.$codeapplicant;
+            $setCodeApplicant = 'APLCNT'.$codeapplicant+1;
         } else {
             //if null then
             $setCodeApplicant = 'APLCNT1';
@@ -68,6 +68,10 @@ class ApplicantController extends Controller
     public function showApprovalPage($id){
 
         $applicant = Applicant::find($id);
+
+        $applicant->ijazah = $applicant->ijazah == '' ? '':asset( 'storage/'.$applicant->ijazah);
+        $applicant->cv = $applicant->cv == '' ? '':asset( 'storage/'.$applicant->cv);
+
         $assignment = Assignment::all();
         $assignmentdetail = Wfassignment::where('assignstatus', 'ACTIVE')->where('ownertrxid',$id)->first();
         $recruitmenthistory = Recruitmenthistory::where('ownertrxid',$id)->get();
@@ -125,12 +129,12 @@ class ApplicantController extends Controller
                 'memo' => $request->memo,
             ]);
 
-            if ($assignmentdetail->status == 'COMPLETE') {
+            if ($assignmentdetail->status == 'APPR') {
                 Recruitmenthistory::create([
                     'ownertrxid' => $request->id,
                     'status' => $assignmentdetail->status,
                     'changeby' => $username,
-                    'memo' => 'Complete Document',
+                    'memo' => 'Document Approved',
                 ]);
             }
 
@@ -237,7 +241,7 @@ class ApplicantController extends Controller
         if ($request->action == 'ROUTE'){
             $isexist = Applicant::where('applicantcode',$request->applicantcode)->first();
 
-            if ($isexist){
+            if ($isexist == null){
                 // kalo get data nyaa not found maka dia akan create
                 //create applicant
                 $objectapplicant = $this->createApplicant($request);
@@ -258,7 +262,7 @@ class ApplicantController extends Controller
             //update status doc applicant
             $applicantupdt = Applicant::find($objectapplicant->id);
             $applicantupdt->status = $assignmentdetail->status;
-            $applicantupdt->isedit = false;
+            $applicantupdt->isedit = true;
             $applicantupdt->save();
 
             $username = Auth::user()->name;
@@ -328,14 +332,17 @@ class ApplicantController extends Controller
      */
     public function show(Applicant $applicant)
     {
-        $applicantObjct = Applicant::find($applicant->id);
+
+        $applicant->ijazah = $applicant->ijazah == '' ? '':asset( 'storage/'.$applicant->ijazah);
+        $applicant->cv = $applicant->cv == '' ? '':asset( 'storage/'.$applicant->cv);
+
         $assignment = Assignment::all();
         $assignmentnow = Wfassignment::where('assignstatus', 'ACTIVE')->where('ownertrxid',$applicant->id)->first();
         $recruitmenthistory = Recruitmenthistory::where('ownertrxid',$applicant->id)->get();
         $department = Organization::distinct()->get(['org_code','org_name']);
         $position = Organization::all('position_title','position_code','org_code','org_name');
         return Inertia::render('Recruitment/ShowRecruitment',[
-            'applicant' => $applicantObjct,
+            'applicant' => $applicant,
             'assignment' => $assignment,
             'assignmentnow' => $assignmentnow,
             'recruitmenthistory' => $recruitmenthistory,

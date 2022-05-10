@@ -824,6 +824,11 @@
                         type="file"
                         disabled
                       >
+                      <a target="_blank" v-show="form.ijazah" :href="form.ijazah" class="mt-2 block w-full disabled:opacity-75">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg> Open File
+                      </a>
                       <jet-input-error :message="form.errors.ijazah" class="mt-2" />
                     </div>
 
@@ -854,6 +859,11 @@
                              type="file"
                              disabled
                       >
+                      <a target="_blank" v-show="form.cv" :href="form.cv" class="mt-2 block w-full disabled:opacity-75">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg> Open File
+                      </a>
                       <jet-input-error :message="form.errors.cv" class="mt-2" />
                     </div>
 

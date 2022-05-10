@@ -64,17 +64,17 @@ class PegawaiController extends Controller
      */
     public function edit($id)
     {
-        $users = User::where('id', $id)->first();
+        $user = User::where('id', $id)->first();
         $userManager = User::whereIn('position_category', array('VP','MGR','GM'))->get();
         $department = Organization::distinct()->get(['org_code','org_name']);
         $position = Organization::all('position_title','position_code','org_code','org_name');
-        $user = User::all('id','name','backtoback','backtoback_id','posname');
+        $users = User::all('id','name','backtoback','backtoback_id','posname');
         return Inertia::render('Pegawai/PegawaiEdit', [
-            'userdetail' => $users,
+            'userdetail' => $user,
             'userManager' => $userManager,
             'department' => $department,
             'position' => $position,
-            'users' => $user
+            'users' => $users
         ]);
     }
 

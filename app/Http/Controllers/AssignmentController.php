@@ -50,7 +50,7 @@ class AssignmentController extends Controller
             'assignment_code' => ['required','unique:App\Models\Assignment,assignment_code'],
             'assignment_name' => ['required','max:100'],
             'assignment_description' => ['required','max:255'],
-            'rowData' => ['required|array|min:1']
+            'rowData' => ['required','array']
         ],[
             'rowData.required' => 'Please Add Assignment Detail Atleast One'
         ]);

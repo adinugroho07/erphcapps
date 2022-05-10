@@ -875,9 +875,7 @@ export default defineComponent({
         { text: "Kaleng", value: "kaleng" },
       ],
       managerUp: this.userManager,
-      selected: this.userManager.find(
-        (u) => u.id === this.userdetail.suppervisor_id
-      ),
+      selected: {},
       listUser: this.users,
       selectedb2b: {},
     };
@@ -950,7 +948,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    console.log(this.userdetail);
+    console.log("===="+this.userdetail);
     if(this.userdetail.backtoback_id === null || this.userdetail.backtoback_id === ''){
       this.selectedb2b = {
         id: '',
@@ -962,6 +960,20 @@ export default defineComponent({
       this.selectedb2b = this.users.find(
         (u) => u.id === this.userdetail.backtoback_id
       )
+    }
+
+    let tempObject = this.userManager.find(
+      (u) => u.id === this.userdetail.suppervisor_id
+    );
+    if(tempObject){
+      this.selected = tempObject;
+    } else {
+      this.selected = {
+        id: '',
+        profile_photo_url: "https://ui-avatars.com/api/?name=Not+Found&color=7F9CF5&background=EBF4FF",
+        name: "Please Chose One",
+        posname: ""
+      };
     }
   },
 });

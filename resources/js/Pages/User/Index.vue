@@ -136,8 +136,10 @@
                               </svg>
                             </jet-button>
                           </Link>
-                          <jet-button class="bg-red-500 hover:bg-red-600" @click="deleteUser(user,index)"
-                            >Delete
+                          <jet-button title="Non Active User" class="bg-red-500 hover:bg-red-600" @click="deleteUser(user)">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                            </svg>
                           </jet-button>
                         </td>
                       </tr>
@@ -164,6 +166,8 @@ import { Link } from "@inertiajs/inertia-vue3";
 import JetButton from "@/Jetstream/Button";
 import { Inertia } from '@inertiajs/inertia'
 import Pagination from '@/Jetstream/PaginationAction';
+import {createToast} from "mosha-vue-toastify";
+import 'mosha-vue-toastify/dist/style.css'
 
 export default defineComponent({
   components: {
@@ -178,17 +182,32 @@ export default defineComponent({
     const usersForm = ref(props.users);
     //console.log(props.users);
 
-    const deleteUser = (user,index) => {
+    const notif = (title,description,type) => {
+      createToast(
+        {
+          title: title,
+          description: description
+        },
+        {
+          showIcon: 'true',
+          hideProgressBar: 'false',
+          transition: 'slide',
+          type: type,
+        }
+      )
+    }
+
+    const deleteUser = (user) => {
       if (confirm("Do you really want to delete user "+user.name+" ?")){
-        console.log(usersForm.value.data);
-        Inertia.delete('/users/'+user.id, user);
-        usersForm.value.data.splice(index, 1);
+        // Inertia.delete('/users/'+user.id, user);
+        this.notif('Success','Deactivated User '+user.name+' Successfully','success');
       }
     };
 
     return {
       usersForm,
-      deleteUser
+      deleteUser,
+      notif
     };
   },
 });

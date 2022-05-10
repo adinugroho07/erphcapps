@@ -57,6 +57,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::resource('assignment',AssignmentController::class);
     Route::resource('wfassignment',WfassignmentController::class);
     Route::resource('timesheet',TimesheetController::class);
+    Route::get('/timesheet/all/data',[TimesheetController::class, 'getAllTimeSheet'])->name('timesheet.all');
+    Route::get('/viewattachment/{path}', [TimesheetController::class, 'getAttachment'])->name('timesheet.attachment');
 });
 
 //approval URL
@@ -64,6 +66,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/assignment/{id}/applicant/approval',[ApplicantController::class, 'showApprovalPage']);
     Route::get('/assignment/{id}/timesheet/approval',[TimesheetController::class, 'showApprovalPage']);
     Route::post('/assignment/applicant/approval',[ApplicantController::class, 'storeApproval'])->name('applicant.approve');
+    Route::post('/assignment/timesheet/approval',[TimesheetController::class, 'storeApproval'])->name('timesheet.approve');
 
     //Route::get('/assignment/{id}/asdasd/approval',[ApplicantController::class, 'showApprovalPage']);
     //Route::post('/assignment/asdasd/approval',[ApplicantController::class, 'storeApproval']);

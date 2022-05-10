@@ -11,12 +11,11 @@ class Timesheetdetail extends Model
 
     protected $table = 'timesheet_detail';
 
+
     protected $fillable = [
         'timesheet_id',
         'workstatus',
         'tanggal',
-        'starthours',
-        'endhours',
         'totalhours',
         'hadir',
         'worklocation',

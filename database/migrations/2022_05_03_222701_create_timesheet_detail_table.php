@@ -22,8 +22,8 @@ return new class extends Migration
             $table->time('endhours', $precision = 0);
             $table->integer('totalhours');
             $table->boolean('hadir')->default(false);
-            $table->string('worklocation', 250);
-            $table->string('remarks', 400);
+            $table->string('worklocation', 250)->nullable();
+            $table->string('remarks', 400)->nullable();
             $table->timestamps();
         });
     }

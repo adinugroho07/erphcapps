@@ -14,6 +14,8 @@ class Timesheet extends Model
     protected $fillable = [
       'assignment_code',
       'assignment_id',
+      'createdby',
+      'createdbyid',
       'status',
       'timesheetcode',
       'isedit',
@@ -21,6 +23,7 @@ class Timesheet extends Model
       'email',
       'description',
       'periode',
+      'year',
       'attachment1',
       'attachment2',
       'attachment3',

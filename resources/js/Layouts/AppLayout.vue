@@ -115,8 +115,8 @@
                                 </jet-dropdown>
                                 <!-- end Pegawai dropdown -->
 
-                                <!-- start Pegawai dropdown -->
-                                <jet-dropdown :class="getDataPegawaiIsActive">
+                                <!-- start Timesheet dropdown -->
+                                <jet-dropdown :class="getDataTimesheetIsActive">
                                   <template #trigger>
                                     <button class="pt-0 pb-5">
                                       Personal TimeSheet
@@ -135,18 +135,18 @@
                                     </jet-dropdown-link>
 
                                     <div class="border-t border-gray-100"></div>
-                                    <jet-dropdown-link :href="route('absenrsc.index')" :active="route().current('absenrsc.index')">
+                                    <jet-dropdown-link :href="route('timesheet.index')" :active="route().current('timesheet.*')">
                                       List Personal Timesheet
                                     </jet-dropdown-link>
 
                                     <div class="border-t border-gray-100"></div>
-                                    <jet-dropdown-link :href="route('role.index')"  :active="route().current('role.*')">
+                                    <jet-dropdown-link :href="route('timesheet.all')"  :active="route().current('timesheet.*')">
                                       All TimeSheet
                                     </jet-dropdown-link>
 
                                   </template>
                                 </jet-dropdown>
-                                <!-- end Pegawai dropdown -->
+                                <!-- end Timesheet dropdown -->
 
                                 <jet-nav-link :href="route('absenrsc.create')" :active="route().current('absenrsc.create')">
                                   Absen
@@ -414,6 +414,16 @@
               const absen = this.route().current('absenrsc.index');
               const role = this.route().current('role.*');
               if(absen || role){
+                classActive = 'mt-5 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition';
+              } else {
+                classActive = 'mt-5 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition';
+              }
+              return classActive;
+            },
+            getDataTimesheetIsActive(){
+              let classActive = '';
+              const timesheet = this.route().current('timesheet.*');
+              if(timesheet){
                 classActive = 'mt-5 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition';
               } else {
                 classActive = 'mt-5 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition';

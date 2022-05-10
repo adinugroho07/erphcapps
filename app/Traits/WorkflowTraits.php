@@ -12,6 +12,13 @@ trait WorkflowTraits
 {
     public function init($assignmentcode,$assignmentid,$iddoctransaksi,$module,$codedoctransaksi,$link){
 
+        //pengecekan apakah ada wf yang berjalan . jika ada maka akan di hapus dulu untuk kemudian di create ulang.
+        $isExist = Wfassignment::where('ownertrxid',$iddoctransaksi)->where('assignstatus', 'ACTIVE')->first();
+        if (!$isExist){
+            // kalo get data nyaa found
+            Wfassignment::where('ownertrxid',$iddoctransaksi)->where('assignstatus', 'ACTIVE')->delete();
+        }
+
         //ambil sequence dan ambil data dari assignment detail paling rendah
         $assignmentdetailmin = Assignmentdetail::where('assignment_code',$assignmentcode)->min('sequence');
         $objectAssignmentDetailMin = Assignmentdetail::where('assignment_code',$assignmentcode)->where('sequence', $assignmentdetailmin)->orderBy("sequence")->first();
