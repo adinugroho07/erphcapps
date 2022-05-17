@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\Roleheader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -16,7 +17,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::paginate(5);
+        $roles = Roleheader::paginate(5);
         return Inertia::render('Role/IndexRole', compact('roles'));
     }
 

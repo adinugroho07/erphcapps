@@ -53,7 +53,7 @@ class TimesheetController extends Controller
         $timesheetdetail = Timesheetdetail::where('timesheet_id',$id)->get();
         $timesheethistory = Timesheethistory::where('ownertrxid',$id)->get();
         $assignmentnow = Wfassignment::where('assignstatus', 'ACTIVE')->where('ownertrxid',$id)->first();
-        $assignment = Assignment::all();
+        $assignment = Assignment::where('isactive',1)->get();;
         return Inertia::render('Timesheet/ApproveTimeSheet',[
             'timesheet' => $timesheet,
             'timesheetdetail' =>$timesheetdetail,
@@ -147,7 +147,7 @@ class TimesheetController extends Controller
         $timesheetdetail = Timesheetdetail::where('timesheet_id',$request->id)->get();
         $timesheethistory = Timesheethistory::where('ownertrxid',$request->id)->get();
         $assignmentnow = Wfassignment::where('assignstatus', 'ACTIVE')->where('ownertrxid',$request->id)->first();
-        $assignment = Assignment::all();
+        $assignment = Assignment::where('isactive',1)->get();;
 
         Inertia::share('flash', session('flash', ['message' => $notifMessage]));
         return Inertia::render('Timesheet/ApproveTimeSheet',[
@@ -176,7 +176,7 @@ class TimesheetController extends Controller
             $setCodeApplicant = 'TMSHT1';
         }
 
-        $assignment = Assignment::all();
+        $assignment = Assignment::where('isactive',1)->get();;
         return Inertia::render('Timesheet/CreateTimesheet',[
             'codetimesheet' => $setCodeApplicant,
             'assignment' => $assignment,
@@ -194,7 +194,7 @@ class TimesheetController extends Controller
 
         $validateddata = $request->validate([
             'status' => ['required','max:100'],
-            'timesheetcode' => ['required'],
+            'timesheetcode' => ['required','unique:timesheet'],
             'assignment_id' => ['required'],
             'assignment_code' => ['required'],
             'createdby' => ['required'],
@@ -368,7 +368,7 @@ class TimesheetController extends Controller
         $timesheet->attachment4 = $timesheet->attachment4 == '' ? '':asset( 'storage/'.$timesheet->attachment4);
         $timesheetdetail = Timesheetdetail::where('timesheet_id',$timesheet->id)->get();
         $timesheethistory = Timesheethistory::where('ownertrxid',$timesheet->id)->get();
-        $assignment = Assignment::all();
+        $assignment = Assignment::where('isactive',1)->get();;
         return Inertia::render('Timesheet/ShowTimeSheet',[
            'timesheet' => $timesheet,
             'timesheetdetail' =>$timesheetdetail,
@@ -392,7 +392,7 @@ class TimesheetController extends Controller
         $timesheet->attachment4 = $timesheet->attachment4 == '' ? '':asset( 'storage/'.$timesheet->attachment4);
         $timesheetdetail = Timesheetdetail::where('timesheet_id',$timesheet->id)->get();
         $timesheethistory = Timesheethistory::where('ownertrxid',$timesheet->id)->get();
-        $assignment = Assignment::all();
+        $assignment = Assignment::where('isactive',1)->get();;
         return Inertia::render('Timesheet/EditTimeSheet',[
             'timesheet' => $timesheet,
             'timesheetdetail' =>$timesheetdetail,

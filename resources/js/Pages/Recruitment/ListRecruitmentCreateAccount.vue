@@ -10,11 +10,6 @@
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
-          <div class="float-right">
-            <Link href="applicant/create">
-              <jet-button class="bg-emerald-500">Create Applicant</jet-button>
-            </Link>
-          </div>
           <div class="flex">
             <div class="mb-3 xl:w-96">
               <form @submit.prevent="searching">
@@ -72,11 +67,9 @@
                   <span class="px-2 inline-flex text-xs leading-5 font-semibold text-green-800"> {{ applicant.status }} </span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <Link :href="'applicant/' + applicant.id">
-                    <jet-button class="mr-1 bg-cyan-500 hover:bg-cyan-600">
-                      Create
-                    </jet-button>
-                  </Link>
+                  <jet-button type="button" @click="create(applicant.id,applicant.name)" class="mr-1 bg-cyan-500 hover:bg-cyan-600">
+                    Create
+                  </jet-button>
                 </td>
               </tr>
               </tbody>
@@ -99,6 +92,8 @@ import { Link } from "@inertiajs/inertia-vue3";
 import JetButton from "@/Jetstream/Button";
 import JetLabel from '@/Jetstream/Label.vue';
 import JetInput from '@/Jetstream/Input.vue';
+import {createToast} from "mosha-vue-toastify";
+import 'mosha-vue-toastify/dist/style.css'
 
 export default defineComponent({
   name: "ListRecruitmentCreateAccount",
@@ -116,6 +111,9 @@ export default defineComponent({
       searchValue: this.$inertia.form({
         search: ''
       }),
+      form: this.$inertia.form({
+        id: ''
+      }),
     }
   },
   methods:{
@@ -126,6 +124,30 @@ export default defineComponent({
           this.form.reset('search')
         }
       });
+    },
+    notif(title,description,type){
+      createToast(
+        {
+          title: title,
+          description: description
+        },
+        {
+          showIcon: 'true',
+          hideProgressBar: 'false',
+          transition: 'slide',
+          type: type,
+        }
+      )
+    },
+    create(id,name){
+      if (confirm("Do you really want to create user "+name+" ?")){
+        this.form.id = id;
+        this.form.get('/applicant/user/createuser/',{
+            onError: () => {
+              this.notif('Error Occured', 'User Already Exists !!', 'danger');
+            }
+        });
+      }
     }
 
   }

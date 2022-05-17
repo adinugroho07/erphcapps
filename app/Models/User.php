@@ -118,4 +118,8 @@ class User extends Authenticatable
         return $this->hasMany(Absen::class);
     }
 
+    public function jatahcuti(){
+        return $this->hasOne(Jatahcuti::class);
+    }
+
 }

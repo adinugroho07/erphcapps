@@ -4,6 +4,7 @@
             <template #title><slot name="title"></slot></template>
             <template #description><slot name="description"></slot></template>
             <template #aside><slot name="aside"></slot></template>
+            <template #route><slot name="route"></slot></template>
         </jet-section-title>
 
         <div class="mt-5 md:mt-0 md:col-span-2">

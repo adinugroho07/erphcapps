@@ -44,19 +44,8 @@
 
                       <!-- status -->
                       <div class="col-span-1 sm:col-span-1 mt-3">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          stroke-width="2"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                          />
+                        <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         <jet-label
                           for="status"
@@ -68,19 +57,8 @@
 
                       <!-- applicantcode -->
                       <div class="col-span-1 sm:col-span-1 mt-3">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          stroke-width="2"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                          />
+                        <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                         </svg>
                         <jet-label
                           for="applicantcode"
@@ -93,7 +71,7 @@
                       <!-- assignment-->
                       <div class="col-span-1 sm:col-span-1 mt-3">
                         <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                         </svg>
                         <jet-label for="assignment" value="Assignment" class="font-semibold text-base"/>
                         <select
@@ -107,6 +85,7 @@
                             v-for="option in assignment"
                             :key="option.id"
                             :value="option.id"
+                            :disabled="!form.isedit"
                           >
                             {{ option.assignment_code + " - " + option.assignment_name }}
                           </option>
@@ -161,6 +140,7 @@
                             v-for="option in department"
                             :key="option.org_code"
                             :value="option.org_name"
+                            :disabled="!form.isedit"
                           >
                             {{ option.org_name }}
                           </option>
@@ -199,6 +179,7 @@
                             :selected="form.poscode === option.position_code"
                             :key="option.position_code"
                             :value="option.position_title"
+                            :disabled="!form.isedit"
                           >
                             {{ option.position_title }}
                           </option>
@@ -233,7 +214,7 @@
                           value="Name"
                           class="font-semibold text-base"
                         />
-                        <jet-input id="name" type="text" class="mt-2 block w-full disabled:opacity-75" v-model="form.name" autocomplete="name" />
+                        <jet-input id="name" :disabled="!form.isedit" type="text" class="mt-2 block w-full disabled:opacity-75" v-model="form.name" autocomplete="name" />
                         <jet-input-error :message="form.errors.name" class="mt-2" />
                       </div>
 
@@ -258,7 +239,7 @@
                           value="Email"
                           class="font-semibold text-base"
                         />
-                        <jet-input id="email" type="email" class="mt-2 block w-full" v-model="form.email" />
+                        <jet-input id="email" :disabled="!form.isedit" type="email" class="mt-2 block w-full" v-model="form.email" />
                         <jet-input-error :message="form.errors.email" class="mt-2" />
                       </div>
 
@@ -279,6 +260,7 @@
                             v-for="option in optionsGender"
                             :key="option.value"
                             :value="option.value"
+                            :disabled="!form.isedit"
                           >
                             {{ option.text }}
                           </option>
@@ -297,6 +279,7 @@
                             <input type="date"
                                    id="birthdate"
                                    v-model="form.birthdate"
+                                   :disabled="!form.isedit"
                                    class="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             />
                           </div>
@@ -313,6 +296,7 @@
                           for="placeborn"
                           value="Place Born"
                           class="font-semibold text-base"
+                          :disabled="!form.isedit"
                         />
                         <jet-input id="placeborn" type="email" class="mt-2 block w-full" v-model="form.placeborn" />
                         <jet-input-error :message="form.errors.placeborn" class="mt-2" />
@@ -329,6 +313,7 @@
                           type="text"
                           class="mt-2 block w-full"
                           v-model="form.NIK"
+                          :disabled="!form.isedit"
                         />
                         <jet-input-error :message="form.errors.NIK" class="mt-2" />
                       </div>
@@ -344,6 +329,7 @@
                           type="text"
                           class="mt-2 block w-full"
                           v-model="form.NPWP"
+                          :disabled="!form.isedit"
                         />
                         <jet-input-error :message="form.errors.NPWP" class="mt-2" />
                       </div>
@@ -365,6 +351,7 @@
                             v-for="option in optionsReligion"
                             :key="option.value"
                             :value="option.value"
+                            :disabled="!form.isedit"
                           >
                             {{ option.text }}
                           </option>
@@ -389,6 +376,7 @@
                             v-for="option in optionsMarried"
                             :key="option.value"
                             :value="option.value"
+                            :disabled="!form.isedit"
                           >
                             {{ option.text }}
                           </option>
@@ -413,6 +401,7 @@
                             v-for="option in optionsBlood"
                             :key="option.value"
                             :value="option.value"
+                            :disabled="!form.isedit"
                           >
                             {{ option.text }}
                           </option>
@@ -431,6 +420,7 @@
                           type="text"
                           class="mt-2 block w-full"
                           v-model="form.phonenumber"
+                          :disabled="!form.isedit"
                         />
                         <jet-input-error :message="form.errors.phonenumber" class="mt-2" />
                       </div>
@@ -452,6 +442,7 @@
                             v-for="option in optionsDegree"
                             :key="option.value"
                             :value="option.value"
+                            :disabled="!form.isedit"
                           >
                             {{ option.text }}
                           </option>
@@ -478,6 +469,7 @@
                           type="text"
                           class="mt-2 block w-full"
                           v-model="form.districts"
+                          :disabled="!form.isedit"
                         />
                         <jet-input-error :message="form.errors.districts" class="mt-2" />
                       </div>
@@ -493,6 +485,7 @@
                           type="text"
                           class="mt-2 block w-full"
                           v-model="form.city"
+                          :disabled="!form.isedit"
                         />
                         <jet-input-error :message="form.errors.city" class="mt-2" />
                       </div>
@@ -503,7 +496,7 @@
                           <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                         </svg>
                         <jet-label for="address" value="Address" class="font-semibold text-base"/>
-                        <textarea id="address" class="mt-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="address" rows="3" cols="77" v-model="form.address" ></textarea>
+                        <textarea id="address" :disabled="!form.isedit" class="mt-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="address" rows="3" cols="77" v-model="form.address" ></textarea>
                         <jet-input-error :message="form.errors.address" class="mt-2" />
                       </div>
 
@@ -518,6 +511,7 @@
                           type="text"
                           class="mt-2 block w-full"
                           v-model="form.postalcode"
+                          :disabled="!form.isedit"
                         />
                         <jet-input-error :message="form.errors.postalcode" class="mt-2" />
                       </div>
@@ -533,6 +527,7 @@
                           type="text"
                           class="mt-2 block w-full"
                           v-model="form.citizenship"
+                          :disabled="!form.isedit"
                         />
                         <jet-input-error :message="form.errors.citizenship" class="mt-2" />
                       </div>
@@ -559,6 +554,7 @@
                             v-for="option in optionsDegree"
                             :key="option.value"
                             :value="option.value"
+                            :disabled="!form.isedit"
                           >
                             {{ option.text }}
                           </option>
@@ -577,6 +573,7 @@
                           type="text"
                           class="mt-2 block w-full"
                           v-model="form.major"
+                          :disabled="!form.isedit"
                         />
                         <jet-input-error :message="form.errors.major" class="mt-2" />
                       </div>
@@ -592,6 +589,7 @@
                           type="text"
                           class="mt-2 block w-full"
                           v-model="form.studyprogram"
+                          :disabled="!form.isedit"
                         />
                         <jet-input-error :message="form.errors.studyprogram" class="mt-2" />
                       </div>
@@ -606,6 +604,7 @@
                           <div class="datepicker relative form-floating xl:w-96" >
                             <input type="date"
                                    id="startschool"
+                                   :disabled="!form.isedit"
                                    v-model="form.startschool"
                                    class="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             />
@@ -624,6 +623,7 @@
                           <div class="datepicker relative form-floating xl:w-96" >
                             <input type="date"
                                    id="endschool"
+                                   :disabled="!form.isedit"
                                    v-model="form.endschool"
                                    class="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             />
@@ -660,7 +660,7 @@
                           value="Organization Name"
                           class="font-semibold text-base"
                         />
-                        <jet-input id="orgname" type="text" class="mt-2 block w-full disabled:opacity-75" v-model="form.orgname" autocomplete="name" />
+                        <jet-input id="orgname" type="text" :disabled="!form.isedit" class="mt-2 block w-full disabled:opacity-75" v-model="form.orgname" autocomplete="name" />
                         <jet-input-error :message="form.errors.orgname" class="mt-2" />
                       </div>
 
@@ -685,7 +685,7 @@
                           value="Position In Organization"
                           class="font-semibold text-base"
                         />
-                        <jet-input id="positionexporg" type="text" class="mt-2 block w-full disabled:opacity-75" v-model="form.positionexporg" autocomplete="name" />
+                        <jet-input id="positionexporg" :disabled="!form.isedit" type="text" class="mt-2 block w-full disabled:opacity-75" v-model="form.positionexporg" autocomplete="name" />
                         <jet-input-error :message="form.errors.positionexporg" class="mt-2" />
                       </div>
 
@@ -695,7 +695,7 @@
                           <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                         </svg>
                         <jet-label for="orgdescriptions" value="Organization Description" class="font-semibold text-base"/>
-                        <textarea id="orgdescriptions" class="mt-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="orgdescriptions" rows="3" cols="77" v-model="form.orgdescriptions" ></textarea>
+                        <textarea id="orgdescriptions" :disabled="!form.isedit" class="mt-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="orgdescriptions" rows="3" cols="77" v-model="form.orgdescriptions" ></textarea>
                         <jet-input-error :message="form.errors.orgdescriptions" class="mt-2" />
                       </div>
 
@@ -710,6 +710,7 @@
                             <input type="date"
                                    id="inorg"
                                    v-model="form.inorg"
+                                   :disabled="!form.isedit"
                                    class="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             />
                           </div>
@@ -728,6 +729,7 @@
                             <input type="date"
                                    id="outorg"
                                    v-model="form.outorg"
+                                   :disabled="!form.isedit"
                                    class="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             />
                           </div>
@@ -764,6 +766,7 @@
                           class="mt-2 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                           id="ijazah"
                           @input="form.ijazah = $event.target.files[0]"
+                          :disabled="!form.isedit"
                           type="file">
                         <jet-input-error :message="form.errors.ijazah" class="mt-2" />
                       </div>
@@ -792,6 +795,7 @@
                         <input class="mt-2 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                id="cv"
                                @input="form.cv = $event.target.files[0]"
+                               :disabled="!form.isedit"
                                type="file">
                         <jet-input-error :message="form.errors.cv" class="mt-2" />
                       </div>
@@ -809,7 +813,7 @@
                     <jet-button
                       class="ml-2 bg-cyan-500 hover:bg-cyan-600 object-left"
                       :class="{ 'opacity-25': form.processing }"
-                      :disabled="form.processing"
+                      :disabled="form.processing || !form.isedit"
                       type="button"
                       v-show="form.status === 'DRAFT'"
                       @click.prevent = "hold"
@@ -819,7 +823,7 @@
                     <jet-button
                       class="ml-2 bg-cyan-500 hover:bg-cyan-600 object-left"
                       :class="{ 'opacity-25': form.processing }"
-                      :disabled="form.processing"
+                      :disabled="form.processing || !form.isedit"
                       type="button"
                       v-show="form.status === 'DRAFT' || form.status === 'HOLD'"
                       @click.prevent = "submit"
@@ -1018,8 +1022,10 @@ export default defineComponent({
       this.form.assignment_code = objetAssignment.assignment_code;
       this.form.post(route('applicant.store'), {
         onSuccess: () => {
-          this.notif('Success',this.$page.props.flash.message,'success');
-          this.resetInputField(this.form);
+          this.notif('Success',this.$page.props.flash.message.message,'success');
+          this.form.status = this.$page.props.flash.message.status;
+          this.form.isedit = false;
+          // this.resetInputField(this.form);
         },
         onError: () => {
           this.notif('Error Occured','Please Read The Errors Message At The Column Field','danger');
@@ -1050,8 +1056,10 @@ export default defineComponent({
       console.log(this.form);
       this.form.post(route('applicant.store'), {
         onSuccess: () => {
-          this.notif('Success',this.$page.props.flash.message,'success');
-          this.resetInputField(this.form);
+          this.notif('Success',this.$page.props.flash.message.message,'success');
+          this.form.status = this.$page.props.flash.message.status;
+          this.form.isedit = false;
+          // this.resetInputField(this.form);
         },
         onError: () => {
           this.notif('Error Occured','Please Read The Errors Message At The Column Field','danger');
@@ -1078,39 +1086,39 @@ export default defineComponent({
         this.attachment = true;
       }
     },
-    resetInputField(form){
-      form.reset('assignment_id');
-      form.reset('assignment_code');
-      form.reset('name');
-      form.reset('email');
-      form.reset('gender');
-      form.reset('birthdate');
-      form.reset('placeborn');
-      form.reset('address');
-      form.reset('religion');
-      form.reset('married');
-      form.reset('NIK');
-      form.reset('NPWP');
-      form.reset('bloodtype');
-      form.reset('districts');
-      form.reset('city');
-      form.reset('postalcode');
-      form.reset('citizenship');
-      form.reset('phonenumber');
-      form.reset('degree');
-      form.reset('lastdegree');
-      form.reset('major');
-      form.reset('studyprogram');
-      form.reset('startschool');
-      form.reset('endschool');
-      form.reset('positionexporg');
-      form.reset('orgname');
-      form.reset('orgdescriptions');
-      form.reset('inorg');
-      form.reset('outorg');
-      form.reset('ijazah');
-      form.reset('cv')
-    }
+    // resetInputField(form){
+    //   form.reset('assignment_id');
+    //   form.reset('assignment_code');
+    //   form.reset('name');
+    //   form.reset('email');
+    //   form.reset('gender');
+    //   form.reset('birthdate');
+    //   form.reset('placeborn');
+    //   form.reset('address');
+    //   form.reset('religion');
+    //   form.reset('married');
+    //   form.reset('NIK');
+    //   form.reset('NPWP');
+    //   form.reset('bloodtype');
+    //   form.reset('districts');
+    //   form.reset('city');
+    //   form.reset('postalcode');
+    //   form.reset('citizenship');
+    //   form.reset('phonenumber');
+    //   form.reset('degree');
+    //   form.reset('lastdegree');
+    //   form.reset('major');
+    //   form.reset('studyprogram');
+    //   form.reset('startschool');
+    //   form.reset('endschool');
+    //   form.reset('positionexporg');
+    //   form.reset('orgname');
+    //   form.reset('orgdescriptions');
+    //   form.reset('inorg');
+    //   form.reset('outorg');
+    //   form.reset('ijazah');
+    //   form.reset('cv')
+    // }
   }
 });
 

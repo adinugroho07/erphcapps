@@ -101,7 +101,7 @@ class UserController extends Controller
         $userManager = User::whereIn('position_category', array('VP','MGR','GM'))->get();
         $department = Organization::distinct()->get(['org_code','org_name']);
         $position = Organization::all('position_title','position_code','org_code','org_name');
-        $users = User::all('id','name','backtoback','backtoback_id','posname');
+        $users = User::where('status','active')->get(['id','name','backtoback','backtoback_id','posname']);
         return Inertia::render('Pegawai/PegawaiEdit', [
             'userdetail' => $user,
             'userManager' => $userManager,

@@ -42,7 +42,7 @@
                                     </jet-dropdown-link>
 
                                     <div class="border-t border-gray-100"></div>
-                                    <jet-dropdown-link :href="route('role.index')"  :active="route().current('role.*')">
+                                    <jet-dropdown-link :href="route('roleheader.index')"  :active="route().current('role.*')">
                                       Role
                                     </jet-dropdown-link>
 
@@ -57,8 +57,8 @@
                                     </jet-dropdown-link>
 
                                     <div class="border-t border-gray-100"></div>
-                                    <jet-dropdown-link :href="route('wfassignment.index')"  :active="route().current('wfassignment.*')">
-                                      List Of Value
+                                    <jet-dropdown-link :href="route('applicant.listcreateuser')"  :active="route().current('applicant.*')">
+                                      List User Recruitment To Be Created
                                     </jet-dropdown-link>
 
 
@@ -83,27 +83,27 @@
 
                                     <div class="border-t border-gray-100"></div>
                                     <jet-dropdown-link :href="route('pegawai.index')" :active="route().current('pegawai.*')">
-                                      Kelola Pegawai
+                                      Manage Employee
                                     </jet-dropdown-link>
 
                                     <div class="border-t border-gray-100"></div>
                                     <jet-dropdown-link :href="route('absenrsc.index')" :active="route().current('absenrsc.index')">
-                                      Data Absen Pegawai
+                                      Employee Attendance Data
                                     </jet-dropdown-link>
 
                                     <div class="border-t border-gray-100"></div>
-                                    <jet-dropdown-link :href="route('role.index')"  :active="route().current('role.*')">
-                                      Cuti Pegawai
+                                    <jet-dropdown-link :href="route('cuti.index')"  :active="route().current('cuti.*')">
+                                      Paid Leave
                                     </jet-dropdown-link>
 
                                     <div class="border-t border-gray-100"></div>
-                                    <jet-dropdown-link :href="route('doa.create')"  :active="route().current('role.*')">
-                                      Pengalihan Authority
+                                    <jet-dropdown-link :href="route('doa.index')"  :active="route().current('doa.*')">
+                                      Delegation Of Authority
                                     </jet-dropdown-link>
 
                                     <div class="border-t border-gray-100"></div>
-                                    <jet-dropdown-link :href="route('doa.create')"  :active="route().current('role.*')">
-                                      Personal TimeSheet
+                                    <jet-dropdown-link :href="route('resign.index')"  :active="route().current('resign.*')">
+                                      Resign
                                     </jet-dropdown-link>
 
                                     <div class="border-t border-gray-100"></div>

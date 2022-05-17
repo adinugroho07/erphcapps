@@ -17,7 +17,7 @@ class WfassignmentController extends Controller
     public function index()
     {
         $wfassignment = Wfassignment::where('assignstatus','ACTIVE')->paginate(7);
-        $userManagerUp = User::whereIn('position_category', array('VP','MGR','GM','RECRUITER'))->get();
+        $userManagerUp = User::where('status','active')->whereIn('position_category', array('VP','MGR','GM','RECRUITER'))->get();
         return Inertia::render('Assignment/ActiveAssignment',[
             'wfassignment' => $wfassignment,
             'listuser' => $userManagerUp

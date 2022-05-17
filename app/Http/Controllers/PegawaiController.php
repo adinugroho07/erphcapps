@@ -65,10 +65,10 @@ class PegawaiController extends Controller
     public function edit($id)
     {
         $user = User::where('id', $id)->first();
-        $userManager = User::whereIn('position_category', array('VP','MGR','GM'))->get();
+        $userManager = User::where('status','active')->whereIn('position_category', array('VP','MGR','GM'))->get();
         $department = Organization::distinct()->get(['org_code','org_name']);
         $position = Organization::all('position_title','position_code','org_code','org_name');
-        $users = User::all('id','name','backtoback','backtoback_id','posname');
+        $users = User::where('status','active')->get(['id','name','backtoback','backtoback_id','posname']);
         return Inertia::render('Pegawai/PegawaiEdit', [
             'userdetail' => $user,
             'userManager' => $userManager,

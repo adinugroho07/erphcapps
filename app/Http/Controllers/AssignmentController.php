@@ -31,7 +31,7 @@ class AssignmentController extends Controller
      */
     public function create()
     {
-        $userManagerUp = User::whereIn('position_category', array('VP','MGR','GM','RECRUITER'))->get();
+        $userManagerUp = User::where('status','active')->whereIn('position_category', array('VP','MGR','GM','RECRUITER'))->get();
         return Inertia::render('Assignment/CreateAssignment',[
             'listuser' => $userManagerUp
         ]);
@@ -109,7 +109,7 @@ class AssignmentController extends Controller
      */
     public function edit($id)
     {
-        $userManagerUp = User::whereIn('position_category', array('VP','MGR','GM','RECRUITER'))->get();
+        $userManagerUp = User::where('status','active')->whereIn('position_category', array('VP','MGR','GM','RECRUITER'))->get();
         $assignment = Assignment::find($id);
         $assignmentdetail = Assignmentdetail::where('assignment_id', $id)->get();
         return Inertia::render('Assignment/EditAssignment',[

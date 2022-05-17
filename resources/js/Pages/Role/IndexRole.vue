@@ -9,6 +9,11 @@
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
+<!--          <div class="float-right">-->
+<!--            <Link href="role/create">-->
+<!--              <jet-button class="bg-emerald-500">Create Role</jet-button>-->
+<!--            </Link>-->
+<!--          </div>-->
           <div class="flex">
             <div class="mb-3 xl:w-96">
               <form @submit.prevent="searching">
@@ -32,19 +37,19 @@
                   scope="col"
                   class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  No
+                  Role Code
                 </th>
                 <th
                   scope="col"
                   class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Rolename
+                  Role Name
                 </th>
                 <th
                   scope="col"
                   class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Employee Name
+                  Role Description
                 </th>
                 <th
                   scope="col"
@@ -58,10 +63,10 @@
               </tr>
               </thead>
               <tbody class="bg-white divide-y divide-gray-200">
-              <tr v-for="(role, index) in roles.data" :key="role.id">
+              <tr v-for="(role, index) in roleheader.data" :key="role.id">
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="text-sm text-gray-900">
-                    {{ index+1 }}
+                  <div class="text-sm font-semibold text-gray-900">
+                    {{ role.rolecode }}
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
@@ -71,7 +76,7 @@
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="text-sm text-gray-900">
-                    {{role.user_name}}
+                    {{role.description}}
                   </div>
                 </td>
                 <td
@@ -82,27 +87,27 @@
                 <td
                   class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
                 >
+                  <Link :href="'roleheader/' + role.id">
+                    <jet-button
+                      class="mr-1 bg-cyan-500 hover:bg-cyan-600"
+                      title="Show"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z" />
+                      </svg>
+                    </jet-button>
+                  </Link>
 
-                  <jet-button
-                    class="mr-1 bg-cyan-500 hover:bg-cyan-600"
-                    title="Show"
-                    @click="openModal(index,'show')"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z" />
-                    </svg>
-                  </jet-button>
-
-
-                  <jet-button
-                    class="mr-1 bg-teal-500 hover:bg-teal-600"
-                    title="Edit"
-                    @click="openModal(index,'edit')"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                    </svg>
-                  </jet-button>
+                  <Link :href="'roleheader/' + role.id + '/edit'">
+                    <jet-button
+                      class="mr-1 bg-teal-500 hover:bg-teal-600"
+                      title="Edit"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                      </svg>
+                    </jet-button>
+                  </Link>
 
                 </td>
               </tr>
@@ -110,54 +115,11 @@
             </table>
           </div>
           <div>
-            <pagination class="mt-6" :links="roles.links" />
+            <pagination class="mt-6" :links="roleheader.links" />
           </div>
         </div>
       </div>
     </div>
-    <jet-dialog-modal :show="show">
-      <template #title>
-        <div class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
-          <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalLabel">View Acivity</h5>
-        </div>
-      </template>
-      <template #content>
-        <div class="modal-body relative p-4">
-
-          <!-- rolename -->
-          <div class="">
-            <jet-label for="rolename" value="Role Name" class="text-lg"/>
-            <jet-input id="rolename" type="text" class="mt-1 block w-full" v-model="modalValue.rolename" :disabled="isDisabled"/>
-          </div>
-
-          <!-- description -->
-          <div class="mt-2">
-            <jet-label for="description" value="Description Role" class="text-lg"/>
-            <textarea id="address" class="mt-1 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="address" rows="3" cols="77" v-model="modalValue.description" :disabled="isDisabled"></textarea>
-          </div>
-
-          <!-- user_name -->
-          <div class="mt-2">
-            <jet-label for="user_name" value="User Name" class="text-lg"/>
-            <jet-input id="user_name" type="text" class="mt-1 block w-full" v-model="modalValue.user_name" :disabled="isDisabled"/>
-          </div>
-
-          <!-- updated_at -->
-          <div class="mt-2">
-            <jet-label for="updated_at" value="Updated At" class="text-lg"/>
-            <jet-input id="updated_at" type="text" class="mt-1 block w-full" v-model="modalValue.updated_at" :disabled="isDisabled"/>
-          </div>
-
-        </div>
-      </template>
-      <template #footer>
-        <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-          <button @click="close" type="button" class="px-6 py-2.5 overflow-auto bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out" data-bs-dismiss="modal">
-            Close
-          </button>
-        </div>
-      </template>
-    </jet-dialog-modal>
   </app-layout>
 </template>
 
@@ -170,7 +132,6 @@ import JetButton from "@/Jetstream/Button";
 import JetLabel from '@/Jetstream/Label.vue';
 import JetInput from '@/Jetstream/Input.vue';
 import Pagination from '@/Jetstream/PaginationAction';
-import JetDialogModal from "@/Jetstream/DialogModal";
 import { useForm } from '@inertiajs/inertia-vue3'
 
 export default defineComponent ({
@@ -179,15 +140,13 @@ export default defineComponent ({
     Link,
     JetButton,
     Pagination,
-    JetDialogModal,
     JetLabel,
     JetInput
   },
-  props: ['roles'],
+  props: ['roleheader'],
   setup(props){
     //console.log(props.roles.data);
 
-    const show =  ref(false);
     const isDisabled = ref(true);
 
 
@@ -211,32 +170,10 @@ export default defineComponent ({
         })
     }
 
-    const openModal = (index,action) => {
-      if (action === 'edit'){
-        isDisabled.value = false;
-      }
-      show.value = true;
-      const newData = props.roles.data[index];
-      modalValue.value.id = newData.id;
-      modalValue.value.rolename = newData.rolename;
-      modalValue.value.description = newData.description;
-      modalValue.value.user_name = newData.user_name;
-      modalValue.value.created_at = newData.created_at;
-      modalValue.value.updated_at = newData.updated_at;
-    }
-
-    const close = () => {
-      show.value = false;
-    }
-
     return {
       searchValue,
-      show,
-      modalValue,
       isDisabled,
       searching,
-      openModal,
-      close
     }
   }
 });

@@ -77,7 +77,12 @@
                       Show
                     </jet-button>
                   </Link>
-                  <Link v-show="applicant.status !== 'COMPLETE'" :href="'/assignment/' + applicant.id + '/applicant/approval/'">
+                  <Link v-show="applicant.status === 'HOLD' || applicant.status === 'DRAFT'" :href="'/applicant/' + applicant.id + '/edit'">
+                    <jet-button class="mr-1 bg-cyan-500 hover:bg-cyan-600">
+                      Edit
+                    </jet-button>
+                  </Link>
+                  <Link v-show="applicant.status !== 'COMPLETE' || applicant.status !== 'DRAFT' || applicant.status !== 'HOLD'" :href="'/assignment/' + applicant.id + '/applicant/approval/'">
                     <jet-button class="mr-1 bg-cyan-500 hover:bg-cyan-600">
                       Route
                     </jet-button>

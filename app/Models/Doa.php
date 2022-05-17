@@ -9,10 +9,15 @@ class Doa extends Model
 {
     use HasFactory;
 
-    protected $table = "role";
+    protected $table = "doa";
 
     protected $fillable = [
         'justification',
+        'assignment_code',
+        'assignment_id',
+        'status',
+        'isedit',
+        'doacode',
         'oridepartment',
         'oriposition',
         'alias',
@@ -22,6 +27,18 @@ class Doa extends Model
         'start_date',
         'end_date',
         'created_by',
-        'is_active'
+        'is_active',
+        'attachment1',
+        'attachment2',
     ];
+
+    public function getCreatedAtAttribute($value)
+    {
+        return now()->parse($value)->timezone(config('app.timezone'))->format('d F Y H:i:s');
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return now()->parse($value)->timezone(config('app.timezone'))->diffForHumans();
+    }
 }

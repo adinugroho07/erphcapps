@@ -32,7 +32,7 @@
               <!-- Entered At -->
 
               <!-- Name -->
-              <div class="col-span-6 sm:col-span-4">
+              <div class="col-span-6 sm:col-span-3">
                 <jet-label for="name" value="Name" />
                 <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" autocomplete="name" disabled/>
                 <jet-input-error :message="form.errors.name" class="mt-2" />
@@ -40,7 +40,7 @@
               <!-- Name -->
 
               <!-- Email -->
-              <div class="col-span-6 sm:col-span-4">
+              <div class="col-span-6 sm:col-span-3">
                 <jet-label for="email" value="Email" />
                 <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" disabled/>
                 <jet-input-error :message="form.errors.email" class="mt-2" />
@@ -48,7 +48,7 @@
               <!-- Email -->
 
               <!-- Department -->
-              <div class="col-span-6 sm:col-span-4">
+              <div class="col-span-6 sm:col-span-3">
                 <jet-label for="department" value="Department" />
                 <jet-input id="department" type="text" class="mt-1 block w-full" v-model="form.department" disabled/>
                 <jet-input-error :message="form.errors.department" class="mt-2" />
@@ -56,7 +56,7 @@
               <!-- Department -->
 
               <!-- Posname -->
-              <div class="col-span-6 sm:col-span-4">
+              <div class="col-span-6 sm:col-span-3">
                 <jet-label for="posname" value="Position Name" />
                 <jet-input id="posname" type="text" class="mt-1 block w-full" v-model="form.posname" disabled/>
                 <jet-input-error :message="form.errors.posname" class="mt-2" />

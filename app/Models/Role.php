@@ -12,7 +12,14 @@ class Role extends Model
     protected $table = "role";
 
     protected $fillable = [
-        'rolename','user_id','user_name','description'
+        'rolename',
+        'user_id',
+        'rolecode',
+        'roleheader_id',
+        'user_name',
+        'description',
+        'extend',
+        'doaid',
     ];
 
     public function scopeSearch($query, $filters){
@@ -39,5 +46,9 @@ class Role extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function roleheader(){
+        return $this->belongsTo(Roleheader::class);
     }
 }

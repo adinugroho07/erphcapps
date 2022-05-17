@@ -3,10 +3,13 @@
 use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\AssignmentController;
+use App\Http\Controllers\CutiController;
 use App\Http\Controllers\DoaController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\ResignController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RoleheaderController;
 use App\Http\Controllers\TimesheetController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WfassignmentController;
@@ -50,6 +53,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     //pada method resource('nama path nya','controller class'). pada parameter ke dua expect nya string bukan array.
     Route::resource('applicant', ApplicantController::class);
     Route::post('applicant/search', [ApplicantController::class, 'search'])->name('searchapplicant');
+    Route::get('applicant/user/createuser',[ApplicantController::class, 'createUser'])->name('applicant.createuser');
+    Route::get('applicant/user/listcreateuser',[ApplicantController::class, 'showlistcreate'])->name('applicant.listcreateuser');
+    Route::post('applicant/user/createuser',[ApplicantController::class, 'storeUser'])->name('applicant.storeuser');
 });
 
 
@@ -58,15 +64,22 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::resource('wfassignment',WfassignmentController::class);
     Route::resource('timesheet',TimesheetController::class);
     Route::get('/timesheet/all/data',[TimesheetController::class, 'getAllTimeSheet'])->name('timesheet.all');
-    Route::get('/viewattachment/{path}', [TimesheetController::class, 'getAttachment'])->name('timesheet.attachment');
 });
 
 //approval URL
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
+    //get approval page
     Route::get('/assignment/{id}/applicant/approval',[ApplicantController::class, 'showApprovalPage']);
     Route::get('/assignment/{id}/timesheet/approval',[TimesheetController::class, 'showApprovalPage']);
+    Route::get('/assignment/{id}/doa/approval',[DoaController::class, 'showApprovalPage']);
+    Route::get('/assignment/{id}/cuti/approval',[CutiController::class, 'showApprovalPage']);
+    Route::get('/assignment/{id}/resign/approval',[ResignController::class, 'showApprovalPage']);
+    //post approval page
     Route::post('/assignment/applicant/approval',[ApplicantController::class, 'storeApproval'])->name('applicant.approve');
     Route::post('/assignment/timesheet/approval',[TimesheetController::class, 'storeApproval'])->name('timesheet.approve');
+    Route::post('/assignment/doa/approval',[DoaController::class, 'storeApproval'])->name('doa.approve');
+    Route::post('/assignment/cuti/approval',[CutiController::class, 'storeApproval'])->name('cuti.approve');
+    Route::post('/assignment/resign/approval',[ResignController::class, 'storeApproval'])->name('resign.approve');
 
     //Route::get('/assignment/{id}/asdasd/approval',[ApplicantController::class, 'showApprovalPage']);
     //Route::post('/assignment/asdasd/approval',[ApplicantController::class, 'storeApproval']);
@@ -75,14 +88,16 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     //pada method resource('nama path nya','controller class'). pada parameter ke dua expect nya string bukan array.
-    Route::resource('role', RoleController::class);
-    Route::post('role/search', [RoleController::class, 'search'])->name('searchrole');
+    Route::resource('roleheader', RoleheaderController::class);
+    Route::post('role/search', [RoleheaderController::class, 'search'])->name('searchrole');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     //pada method resource('nama path nya','controller class'). pada parameter ke dua expect nya string bukan array.
     Route::resource('pegawai',PegawaiController::class);
     Route::resource('doa',DoaController::class);
+    Route::resource('cuti',CutiController::class);
+    Route::resource('resign',ResignController::class);
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->prefix('absen')->group(function(){
