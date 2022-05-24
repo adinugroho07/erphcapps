@@ -380,15 +380,8 @@
                   value="Expired Contract Pegawai"
                   class="font-semibold text-base"
                 />
-                <div class="mt-1 flex items-center justify-center">
-                  <div class="datepicker relative form-floating xl:w-96" data-mdb-toggle-button="false">
-                    <input type="text"
-                           id="expiredcontractdate"
-                           v-model="form.expiredcontractdate"
-                           class="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                           placeholder="Select a date" data-mdb-toggle="datepicker" />
-                  </div>
-                </div>
+                <jet-input id="expiredcontractdate" v-show="form.posstatus === 'pekerja'" type="text" class="mt-1 block w-full" value="Does Not Have An Expiration Date" disabled />
+                <jet-input id="expiredcontractdate" v-show="form.posstatus === 'mitra'" type="date" class="mt-1 block w-full" v-model="form.expiredcontractdate" />
               </div>
 
               <!-- birthdate-->

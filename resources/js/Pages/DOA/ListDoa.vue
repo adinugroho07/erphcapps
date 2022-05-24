@@ -74,12 +74,12 @@
                   <span class="px-2 inline-flex text-xs leading-5 text-green-800"> {{ objdoa.status }} </span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <Link :href="'doa/' + objdoa.id">
+                  <Link :href="route('doa.show',objdoa.id)">
                     <jet-button class="mr-1 bg-cyan-500 hover:bg-cyan-600">
                       Show
                     </jet-button>
                   </Link>
-                  <Link v-show="objdoa.status !== 'COMPLETE' || objdoa.status !== 'DRAFT' || objdoa.status !== 'HOLD'" :href="'/assignment/' + objdoa.id + '/doa/approval/'">
+                  <Link v-show="objdoa.status !== 'COMPLETE' || objdoa.status !== 'DRAFT' || objdoa.status !== 'HOLD'" :href="route('assigndoa.show',objdoa.id)">
                     <jet-button class="mr-1 bg-cyan-500 hover:bg-cyan-600">
                       Route
                     </jet-button>
@@ -127,10 +127,10 @@ export default defineComponent({
   },
   methods: {
     searching() {
-      this.searchValue.post('/applicant/search', {
+      this.searchValue.post(route('searchdoa'), {
         preserveScroll: false,
         onSuccess: () => {
-          this.form.reset('search')
+          this.searchValue.reset('search')
         }
       });
     }

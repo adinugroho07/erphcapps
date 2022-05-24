@@ -128,6 +128,15 @@ class UserPolicy
         };
     }
 
+    public function pegawaiEdit(User $user){
+        $isTrue = $this->checkRole($user, 'admin');
+        if ($isTrue){
+            return Response::allow();
+        } else {
+            return Response::deny('Only Admin Can Access This Page');
+        };
+    }
+
     public function checkRole(User $user,$rolename){
         $isTrue = false;
         $roles = $user->role()->get();

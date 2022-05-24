@@ -1,5 +1,5 @@
 <template>
-  <app-layout title="Dashboard">
+  <app-layout title="Dashboard" pathImage="../../image/logo.png">
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         Absen Page
@@ -163,8 +163,8 @@ export default defineComponent( {
     },
     submitabsen(){
       this.form.absenvalue = this.fillAbsenValue(this.form.absentype);
-      console.log(this.form);
-      this.form.post('/absen/absenrsc', {
+      // console.log(this.form);
+      this.form.post('/absenrsc', {
         preserveScroll: false,
         onSuccess: () => {
           this.notif('Success',this.$page.props.flash.message,'success');

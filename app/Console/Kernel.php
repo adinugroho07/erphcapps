@@ -6,6 +6,7 @@ use App\Models\Assignmentdetail;
 use App\Models\Doa;
 use App\Models\Jatahcuti;
 use App\Models\Role;
+use App\Models\User;
 use App\Models\Wfassignment;
 use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
@@ -53,6 +54,8 @@ class Kernel extends ConsoleKernel
         })->twiceDaily(6,18);
         //cron nyaa akan jalan di setiap jam 6 pagi dan jam 6 sore
 
+        //cron yang akan jalan setiap jam 12 malam setiap hari.
+        //scheduler untuk mengupdate jatah cuti
         $schedule->call(function(){
             $yearnow = Carbon::now()->format('Y');
             $yearyesterday = Carbon::yesterday()->format('Y');
@@ -62,7 +65,14 @@ class Kernel extends ConsoleKernel
                    'cutimelahirkan' => 30,
                 ]);
             }
-        });
+        })->daily();
+
+        //scheduler untuk mengnonactive kan user yang expired contract date nya.
+        $schedule->call(function(){
+            $today = Carbon::now()->format('Y-m-d');
+            $userExists = User::where('expiredcontractdate',1)->get();
+        })->daily();
+
     }
 
     /**

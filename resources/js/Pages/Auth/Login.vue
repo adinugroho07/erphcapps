@@ -12,10 +12,10 @@
                     <div class="text-center">
                       <img
                         class="mx-auto w-48"
-                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                        src="image/logo.png"
                         alt="logo"
                       />
-                      <h4 class="text-xl font-semibold mt-1 mb-12 pb-1">Welcome To ERP HR Module</h4>
+                      <h4 class="text-xl font-semibold mt-1 mb-12 pb-1">Welcome To BHRS</h4>
                     </div>
                     <form @submit.prevent="submit">
                       <p class="mb-4">Please login to your account</p>
@@ -64,12 +64,12 @@
                   background: linear-gradient(to right, #8c9cf4, #7c8cf4, #7c84f4, #6875f5);"
                 >
                   <div class="text-white px-4 py-6 md:p-12 md:mx-6">
-                    <h4 class="text-xl font-semibold mb-6">We are more than just a company</h4>
-                    <p class="text-sm">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                      consequat.
+                    <h4 class="text-xl font-semibold mb-6 text-center">PT Bahtera Interior</h4>
+                    <p class="text-sm text-center">
+                      PT Bahtra Interior merupakan sebuah perusahaan konsultan yang memfokuskan diri sebagai konsultan dan kontraktor interior.
+                      Didirikan pada tahun 2016, Bahtra Interior memiliki sejarah sepanjang lebih dari 5 tahun dalam bidang perencanaan
+                      interior dan konstruksi interior untuk hunian, kantor, hotel, dan ruang komersial melalui desain yang disesuaikan dengan
+                      calon pengguna ruang
                     </p>
                   </div>
                 </div>

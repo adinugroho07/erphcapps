@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Assignment;
 use App\Models\Resign;
 use App\Models\Resignhistory;
+use App\Models\User;
 use App\Models\Wfassignment;
 use App\Traits\WorkflowTraits;
 use Carbon\Carbon;
@@ -17,6 +18,11 @@ class ResignController extends Controller
 {
 
     use WorkflowTraits;
+
+    public function __construct()
+    {
+        $this->authorizeResource(Resign::class, 'resign');
+    }
 
     /**
      * Display a listing of the resource.
@@ -164,7 +170,7 @@ class ResignController extends Controller
         //update status doc timesheet ke status selanjut nya.
         $timsheetupdt = Resign::find($resignObjt->id);
         $timsheetupdt->status = $assignmentdetail->status;
-        $timsheetupdt->isedit = true;
+        $timsheetupdt->isedit = false;
         $timsheetupdt->save();
 
         $username = Auth::user()->name;
@@ -236,6 +242,9 @@ class ResignController extends Controller
     }
 
     public function showApprovalPage($id){
+
+        $this->authorize('approveShow', Resign::class);
+
         $resign = Resign::find($id);
 
         $resign->attachment1 = $resign->attachment1 == '' ? '':asset( 'storage/'.$resign->attachment1);
@@ -252,6 +261,8 @@ class ResignController extends Controller
     }
 
     public function storeApproval(Request $request){
+
+        $this->authorize('approveStore', Resign::class);
 
         $request->validate([
             'resigncode' => ['required'],
@@ -282,7 +293,7 @@ class ResignController extends Controller
             $username = Auth::user()->name;
 
             //insert to history status
-            Doahistory::create([
+            Resignhistory::create([
                 'ownertrxid' => $request->id,
                 'status' => 'REJECTED',
                 'changeby' => $username,
@@ -326,6 +337,10 @@ class ResignController extends Controller
                     'status' => $assignmentdetail->status,
                     'changeby' => $username,
                     'memo' => 'Complete Document',
+                ]);
+                $objectResign = Resign::find($request->id);
+                User::where('id',$objectResign->created_byid)->update([
+                    'status' => 'nonactive'
                 ]);
             }
 

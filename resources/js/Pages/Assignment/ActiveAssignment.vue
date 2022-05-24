@@ -67,6 +67,9 @@
                   <jet-button @click="openModal(assignment)" type="button" class="mr-1 bg-cyan-500 hover:bg-cyan-600">
                     Reroute
                   </jet-button>
+                  <jet-button @click="deactive(assignment)" type="button" class="mr-1 bg-red-500 hover:bg-red-600">
+                    Deactive Assignment
+                  </jet-button>
                 </td>
               </tr>
               </tbody>
@@ -263,6 +266,7 @@ import {
   ListboxOptions,
 } from "@headlessui/vue";
 import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
+import {DateTime} from "luxon";
 
 
 export default defineComponent({
@@ -290,6 +294,7 @@ export default defineComponent({
         search: ''
       }),
       show: false,
+      searchcategory: 'assignment_code',
       form: this.$inertia.form({
         id: '',
         assignment_code: '',
@@ -303,10 +308,37 @@ export default defineComponent({
         assignperson: '',
         assignpersonid: '',
       }),
-      selectedassignmetoid: {}
+      selectedassignmetoid: {},
     }
   },
   methods: {
+    deactive(assignment){
+      if(confirm('Are You Sure Want To Deactive This Assignment '+assignment.codetransaction)){
+
+        this.form.id = assignment.id;
+        this.form.assignment_code   = assignment.assignment_code;
+        this.form.description       = assignment.description;
+        this.form.sequence          = assignment.sequence;
+        this.form.assignstatus      = assignment.assignstatus;
+        this.form.modulename        = assignment.modulename;
+        this.form.codetransaction   = assignment.codetransaction;
+        this.form.origperson        = assignment.origperson;
+        this.form.origpersonid      = assignment.origpersonid;
+        this.form.assignperson      = assignment.assignperson;
+        this.form.assignpersonid    = assignment.assignpersonid;
+
+        this.form.post(route('wfassignment.deactive'),{
+          onSuccess: () => {
+            this.notif('Success', this.$page.props.flash.message, 'success');
+            this.resetvalue();
+          },
+          onError: () => {
+            this.notif('Error Occured', 'Please Read The Errors Message At The Column Field', 'danger');
+            this.resetvalue();
+          }
+        });
+      }
+    },
     openModal(objectassignment){
       this.show = true;
       this.form.id = objectassignment.id;
@@ -324,23 +356,12 @@ export default defineComponent({
     },
     close(){
       this.show = false;
-      this.form.id   = '';
-      this.form.assignment_code   = '';
-      this.form.description       = '';
-      this.form.sequence          = '';
-      this.form.assignstatus      = '';
-      this.form.modulename        = '';
-      this.form.codetransaction   = '';
-      this.form.origperson        = '';
-      this.form.origpersonid      = '';
-      this.form.assignperson      = '';
-      this.form.assignpersonid    = '';
-      this.selectedassignmetoid = {}
+      this.resetvalue();
     },
     reassign(){
       this.form.assignperson      = this.selectedassignmetoid.name;
       this.form.assignpersonid    = this.selectedassignmetoid.id;
-      this.form.put('/wfassignment/'+this.form.id, {
+      this.form.put(route('wfassignment.update',this.form.id), {
         preserveScroll: false,
         onSuccess: () => {
           this.notif('Success', this.$page.props.flash.message, 'success');
@@ -353,10 +374,10 @@ export default defineComponent({
       });
     },
     searching() {
-      this.searchValue.post('/applicant/search', {
+      this.searchValue.post(route('searchwfassignment'), {
         preserveScroll: false,
         onSuccess: () => {
-          this.form.reset('search')
+          this.searchValue.reset('search')
         }
       });
     },
@@ -374,6 +395,20 @@ export default defineComponent({
         }
       )
     },
+    resetvalue(){
+      this.form.id   = '';
+      this.form.assignment_code   = '';
+      this.form.description       = '';
+      this.form.sequence          = '';
+      this.form.assignstatus      = '';
+      this.form.modulename        = '';
+      this.form.codetransaction   = '';
+      this.form.origperson        = '';
+      this.form.origpersonid      = '';
+      this.form.assignperson      = '';
+      this.form.assignpersonid    = '';
+      this.selectedassignmetoid = {}
+    }
   }
 })
 </script>

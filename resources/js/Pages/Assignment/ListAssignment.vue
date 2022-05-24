@@ -65,12 +65,12 @@
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <Link :href="'assignment/' + assignment.id">
+                  <Link :href="route('assignment.show',assignment.id)">
                     <jet-button class="mr-1 bg-cyan-500 hover:bg-cyan-600">
                       Show
                     </jet-button>
                   </Link>
-                  <Link :href="'/assignment/' + assignment.id + '/edit'">
+                  <Link :href="route('assignment.edit',assignment.id)">
                     <jet-button class="mr-1 bg-cyan-500 hover:bg-cyan-600">
                       Edit
                     </jet-button>
@@ -118,10 +118,10 @@ export default defineComponent({
   },
   methods: {
     searching() {
-      this.searchValue.post('/applicant/search', {
+      this.searchValue.post(route('searchassignment'), {
         preserveScroll: false,
         onSuccess: () => {
-          this.form.reset('search')
+          this.searchValue.reset('search')
         }
       });
     }

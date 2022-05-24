@@ -1,5 +1,5 @@
 <template>
-  <app-layout title="Dashboard">
+  <app-layout title="Dashboard" pathImage="../image/logo.png">
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         Pegawai Dashboard
@@ -199,7 +199,7 @@
               <!-- Nik -->
               <div class="col-span-6 sm:col-span-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
                 <jet-label for="nik" value="Nik" class="font-semibold text-base"/>
                 <jet-input id="nik" type="text" class="mt-2 block w-full" v-model="form.nik" disabled/>
@@ -246,7 +246,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
                 </svg>
-                <jet-label for="posstatus" value="Status Pegawai" class="font-semibold text-base"/>
+                <jet-label for="posstatus" value="Worker Status" class="font-semibold text-base"/>
                 <jet-input id="posstatus" type="text" class="mt-2 block w-full" v-model="form.posstatus" disabled />
               </div>
 
@@ -260,7 +260,8 @@
                   value="Expired Contract Pegawai"
                   class="font-semibold text-base"
                 />
-                <jet-input id="expiredcontractdate" type="text" class="mt-2 block w-full" v-model="form.expiredcontractdate" disabled />
+                <jet-input id="expiredcontractdate" v-show="form.posstatus === 'pekerja'" type="text" class="mt-2 block w-full" value="Does Not Have An Expiration Date" disabled />
+                <jet-input id="expiredcontractdate" v-show="form.posstatus === 'mitra'" type="text" class="mt-2 block w-full" v-model="form.expiredcontractdate" disabled />
               </div>
 
               <!-- birthdate-->
@@ -320,7 +321,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
-                <jet-label for="spouse" value="Istri" class="font-semibold text-base"/>
+                <jet-label for="spouse" value="Spouse" class="font-semibold text-base"/>
                 <jet-input id="spouse" type="text" class="mt-2 block w-full" v-model="form.spouse" disabled />
               </div>
 
@@ -329,7 +330,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
                 </svg>
-                <jet-label for="child1" value="Anak Pertama" class="font-semibold text-base"/>
+                <jet-label for="child1" value="Child 1" class="font-semibold text-base"/>
                 <jet-input id="child1" type="text" class="mt-2 block w-full" v-model="form.child1" disabled />
               </div>
 
@@ -338,7 +339,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
                 </svg>
-                <jet-label for="child2" value="Anak Kedua" class="font-semibold text-base"/>
+                <jet-label for="child2" value="Child 2" class="font-semibold text-base"/>
                 <jet-input id="child2" type="text" class="mt-2 block w-full" v-model="form.child2" disabled />
               </div>
 
@@ -347,7 +348,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
                 </svg>
-                <jet-label for="child3" value="Anak Ketiga" class="font-semibold text-base"/>
+                <jet-label for="child3" value="Child 3" class="font-semibold text-base"/>
                 <jet-input id="child3" type="text" class="mt-2 block w-full" v-model="form.child3" disabled />
               </div>
 
@@ -365,7 +366,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
                 </svg>
-                <jet-label for="state" value="Provinsi" class="font-semibold text-base"/>
+                <jet-label for="state" value="Province" class="font-semibold text-base"/>
                 <jet-input id="state" type="text" class="mt-2 block w-full" v-model="form.state" disabled />
               </div>
 
@@ -374,7 +375,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
-                <jet-label for="city" value="Kota" class="font-semibold text-base"/>
+                <jet-label for="city" value="City" class="font-semibold text-base"/>
                 <jet-input id="city" type="text" class="mt-2 block w-full" v-model="form.city" disabled />
               </div>
 
@@ -383,7 +384,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
                 </svg>
-                <jet-label for="postalcode" value="Kode Pos" class="font-semibold text-base"/>
+                <jet-label for="postalcode" value="Postal Code" class="font-semibold text-base"/>
                 <jet-input id="postalcode" type="text" class="mt-2 block w-full" v-model="form.postalcode" disabled />
               </div>
 
@@ -392,7 +393,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
-                <jet-label for="address" value="Alamat" class="font-semibold text-base"/>
+                <jet-label for="address" value="Address" class="font-semibold text-base"/>
                 <textarea id="address" class="mt-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="address" rows="3" cols="77" v-model="form.address" disabled></textarea>
               </div>
 
@@ -426,7 +427,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
-                <jet-label for="phonenum" value="Nomor Handphone" class="font-semibold text-base"/>
+                <jet-label for="phonenum" value="Handphone Number" class="font-semibold text-base"/>
                 <jet-input id="phonenum" type="text" class="mt-2 block w-full" v-model="form.phonenum" disabled />
               </div>
 
@@ -506,7 +507,7 @@
             <!--role-->
 
             <template #actions>
-              <Link href="/pegawai" class="float-left">
+              <Link :href="linkback" class="float-left">
                 <jet-button class="bg-cyan-500 hover:bg-cyan-600" >Back</jet-button>
               </Link>
             </template>
@@ -541,7 +542,7 @@ export default defineComponent({
     JetSecondaryButton,
     Link
   },
-  props:['userdetail','roles'],
+  props:['userdetail','roles','darimana'],
   data(){
     return{
       form: this.$inertia.form({
@@ -591,6 +592,13 @@ export default defineComponent({
     }
   },
   computed:{
+    linkback(){
+      if(this.darimana === 'pegawai'){
+        return '/pegawai';
+      } else {
+        return '/users';
+      }
+    },
     isActiveBasic(){
       if(this.basic){
         return this.active;

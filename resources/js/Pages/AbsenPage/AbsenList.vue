@@ -1,5 +1,5 @@
 <template>
-  <app-layout title="Dashboard">
+  <app-layout title="Dashboard" pathImage="../image/logo.png">
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         Absen List
@@ -73,6 +73,56 @@
         </div>
       </div>
     </div>
+    <jet-dialog-modal :show="show">
+      <template #title>
+        <div class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+          <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalLabel">View Acivity</h5>
+        </div>
+      </template>
+      <template #content>
+        <form >
+          <div class="modal-body relative p-4">
+            <!-- name -->
+            <div class="">
+              <jet-label for="name" value="Name" class="text-lg"/>
+              <jet-input id="name" type="text" class="mt-1 block w-full" v-model="modalValue.name" disabled/>
+            </div>
+
+            <!-- email -->
+            <div class="">
+              <jet-label for="email" value="Email" class="text-lg"/>
+              <jet-input id="email" type="text" class="mt-1 block w-full" v-model="modalValue.email" disabled/>
+            </div>
+
+            <!-- absentype -->
+            <div class="">
+              <jet-label for="email" value="Absen Type" class="text-lg"/>
+              <jet-input id="email" type="text" class="mt-1 block w-full" v-model="modalValue.email" disabled/>
+            </div>
+
+            <!-- tappingtime -->
+            <div class="">
+              <jet-label for="tappingtime" value="Tapping Time" class="text-lg"/>
+              <jet-input id="tappingtime" type="text" class="mt-1 block w-full" v-model="modalValue.tappingtime" disabled/>
+            </div>
+
+            <!-- memo -->
+            <div class="mt-2">
+              <jet-label for="activity" value="Memo Approval" class="text-lg"/>
+              <textarea id="activity" class="mt-1 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="activity" rows="3" cols="62" v-model="modalValue.activity" ></textarea>
+            </div>
+
+          </div>
+        </form>
+      </template>
+      <template #footer>
+        <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+          <button @click="close" type="button" class="px-6 py-2.5 overflow-auto bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out" data-bs-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </template>
+    </jet-dialog-modal>
   </app-layout>
 </template>
 
@@ -120,10 +170,10 @@ export default defineComponent({
   },
   methods:{
     searching(){
-      this.searchValue.post('/absen/search/', {
+      this.searchValue.post(route('searchabsenwithactivelogin'), {
         preserveScroll: false,
         onSuccess: () => {
-          this.form.reset('search')
+          this.searchValue.reset('search')
         }
       });
     },

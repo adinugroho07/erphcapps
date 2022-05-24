@@ -13,7 +13,7 @@
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('dashboard')">
-                                    <jet-application-mark class="block h-9 w-auto" />
+                                  <img :src="pathImage" class="block h-12 w-auto" alt="image"/>
                                 </Link>
                             </div>
 
@@ -38,7 +38,7 @@
 
                                     <div class="border-t border-gray-100"></div>
                                     <jet-dropdown-link :href="route('users.index')" :active="route().current('users.*')">
-                                      User
+                                      User Account
                                     </jet-dropdown-link>
 
                                     <div class="border-t border-gray-100"></div>
@@ -71,7 +71,7 @@
                                 <jet-dropdown :class="getDataPegawaiIsActive">
                                   <template #trigger>
                                     <button class="pt-0 pb-5">
-                                      Pegawai
+                                      Employee
                                     </button>
                                   </template>
 
@@ -84,11 +84,6 @@
                                     <div class="border-t border-gray-100"></div>
                                     <jet-dropdown-link :href="route('pegawai.index')" :active="route().current('pegawai.*')">
                                       Manage Employee
-                                    </jet-dropdown-link>
-
-                                    <div class="border-t border-gray-100"></div>
-                                    <jet-dropdown-link :href="route('absenrsc.index')" :active="route().current('absenrsc.index')">
-                                      Employee Attendance Data
                                     </jet-dropdown-link>
 
                                     <div class="border-t border-gray-100"></div>
@@ -107,9 +102,11 @@
                                     </jet-dropdown-link>
 
                                     <div class="border-t border-gray-100"></div>
-                                    <jet-dropdown-link :href="route('orgchart')"  :active="route().current('orgchart')">
-                                      Organization Chart
+                                    <jet-dropdown-link :href="route('mutasi.index')"  :active="route().current('mutasi.*')">
+                                      Transfer Position
                                     </jet-dropdown-link>
+
+
 
                                   </template>
                                 </jet-dropdown>
@@ -148,9 +145,39 @@
                                 </jet-dropdown>
                                 <!-- end Timesheet dropdown -->
 
-                                <jet-nav-link :href="route('absenrsc.create')" :active="route().current('absenrsc.create')">
-                                  Absen
-                                </jet-nav-link>
+                                <!-- start Attendance dropdown -->
+                                <jet-dropdown :class="getDataAttendanceIsActive">
+                                  <template #trigger>
+                                    <button class="pt-0 pb-5">
+                                      Attendance
+                                    </button>
+                                  </template>
+
+                                  <template #content>
+                                    <!-- Account Management -->
+                                    <div class="block px-4 py-2 text-xs text-gray-400">
+                                      Manage All Employee Attendance Data
+                                    </div>
+
+                                    <div class="border-t border-gray-100"></div>
+                                    <jet-dropdown-link :href="route('absenrsc.create')" :active="route().current('absenrsc.*')">
+                                      Create Attendance
+                                    </jet-dropdown-link>
+
+                                    <div class="border-t border-gray-100"></div>
+                                    <jet-dropdown-link :href="route('absenrsc.index')" :active="route().current('absenrsc.*')">
+                                      List Personal Attendance
+                                    </jet-dropdown-link>
+
+                                    <div class="border-t border-gray-100"></div>
+                                    <jet-dropdown-link :href="route('absenrsc.all')"  :active="route().current('absenrsc.all')">
+                                      All Attendance
+                                    </jet-dropdown-link>
+
+                                  </template>
+                                </jet-dropdown>
+                                <!-- end Attendance dropdown -->
+
                                 <jet-nav-link :href="route('applicant.index')" :active="route().current('applicant.*')">
                                   Recruitment
                                 </jet-nav-link>
@@ -378,6 +405,11 @@
     export default defineComponent({
         props: {
             title: String,
+            pathImage:{
+              type: String,
+              required: false,
+              default: 'image/logo.png'
+            }
         },
 
         components: {
@@ -411,9 +443,12 @@
             },
             getDataPegawaiIsActive(){
               let classActive = '';
-              const absen = this.route().current('absenrsc.index');
-              const role = this.route().current('role.*');
-              if(absen || role){
+              const role = this.route().current('pegawai.*');
+              const cuti = this.route().current('cuti.*');
+              const doa = this.route().current('doa.*');
+              const resign = this.route().current('resign.*');
+              const mutasi = this.route().current('mutasi.*');
+              if(role || cuti || doa || resign || mutasi){
                 classActive = 'mt-5 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition';
               } else {
                 classActive = 'mt-5 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition';
@@ -423,6 +458,16 @@
             getDataTimesheetIsActive(){
               let classActive = '';
               const timesheet = this.route().current('timesheet.*');
+              if(timesheet){
+                classActive = 'mt-5 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition';
+              } else {
+                classActive = 'mt-5 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition';
+              }
+              return classActive;
+            },
+            getDataAttendanceIsActive(){
+              let classActive = '';
+              const timesheet = this.route().current('absenrsc.*');
               if(timesheet){
                 classActive = 'mt-5 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition';
               } else {

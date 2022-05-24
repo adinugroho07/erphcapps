@@ -23,6 +23,11 @@ class DoaController extends Controller
 
     use WorkflowTraits;
 
+    public function __construct()
+    {
+        $this->authorizeResource(Doa::class, 'doa');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,14 +41,26 @@ class DoaController extends Controller
         ]);
     }
 
+    public function search()
+    {
+        $doa = Doa::latest()->search(request(['search']))->paginate(7);
+
+        return Inertia::render('DOA/ListDoa', [
+            'doa' => $doa,
+        ]);
+    }
+
     public function showApprovalPage($id){
+
+        $this->authorize('approveShow', Doa::class);
+
         $doa = Doa::find($id);
 
         $doa->attachment1 = $doa->attachment1 == '' ? '':asset( 'storage/'.$doa->attachment1);
         $doa->attachment2 = $doa->attachment2 == '' ? '':asset( 'storage/'.$doa->attachment2);
         $assignmentnow = Wfassignment::where('assignstatus', 'ACTIVE')->where('ownertrxid',$doa->id)->first();
         $user = User::where('status','active')->get(['id','name','posname','poscode','department','department_code']);
-        $assignment = Assignment::where('isactive',1)->get();;
+        $assignment = Assignment::where('isactive',1)->get();
         $doahistory = Doahistory::where('ownertrxid',$doa->id)->get();
         return Inertia::render('DOA/ApprovalDoa',[
             'doa' => $doa,
@@ -55,6 +72,9 @@ class DoaController extends Controller
     }
 
     public function storeApproval(Request $request){
+
+        $this->authorize('approveStore', Doa::class);
+
         $request->validate([
             'applicantcode' => ['required'],
             'status' => ['required'],
@@ -203,7 +223,7 @@ class DoaController extends Controller
         $department = Organization::distinct()->get(['org_code','org_name']);
         $position = Organization::all('position_title','position_code','org_code','org_name');
         $user = User::where('status','active')->get(['id','name','posname','poscode','department','department_code']);
-        $assignment = Assignment::where('isactive',1)->get();;
+        $assignment = Assignment::where('isactive',1)->get();
         return Inertia::render('DOA/DOACreate',[
             'users' => $user,
             'department' => $department,
@@ -360,7 +380,7 @@ class DoaController extends Controller
         $doa->attachment2 = $doa->attachment2 == '' ? '':asset( 'storage/'.$doa->attachment2);
         $assignmentnow = Wfassignment::where('assignstatus', 'ACTIVE')->where('ownertrxid',$doa->id)->first();
         $user = User::where('status','active')->get(['id','name','posname','poscode','department','department_code']);
-        $assignment = Assignment::where('isactive',1)->get();;
+        $assignment = Assignment::where('isactive',1)->get();
         $doahistory = Doahistory::where('ownertrxid',$doa->id)->get();
         return Inertia::render('DOA/ShowDoa',[
             'doa' => $doa,

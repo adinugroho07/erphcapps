@@ -18,6 +18,18 @@ class Assignment extends Model
         'isactive',
     ];
 
+    public function scopeSearch($query, $filters){
+        //jika value filter search tidak ada maka tidak akan query.
+        //fungsi when adalah ketika hasil yang di dapat adalah true. jika true maka function akan di jalan kan.
+        //jika false maka akan di skip function nya.
+        $query->when($filters['search'] ?? false, function($query,$filters){
+            return $query->where('assignment_code', 'like' , '%'.$filters.'%')
+                ->orWhere('assignment_name', 'like' , '%'.$filters.'%')
+                ->orWhere('assignment_description', 'like' , '%'.$filters.'%');
+        });
+
+    }
+
     public function assignmentdetail(){
         return $this->hasMany(Assignmentdetail::class);
     }

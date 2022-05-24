@@ -33,6 +33,14 @@ class UserController extends Controller
         return Inertia::render('User/Index', ['users' => $users]);
     }
 
+    public function search(){
+        $users = User::latest()->search(request(['search']))->paginate(7);
+
+        return Inertia::render('User/Index', [
+            'users' => $users,
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -40,8 +48,17 @@ class UserController extends Controller
      */
     public function create()
     {
-        $userManager = User::whereRelation('Role', 'rolename', 'like', '%manager%')->get();
-        return Inertia::render('User/Create', compact('userManager'));
+
+        $userManager = User::where('status','active')->whereIn('position_category', array('VP','MGR','GM'))->get();
+        $department = Organization::distinct()->get(['org_code','org_name']);
+        $position = Organization::all('position_title','position_code','org_code','org_name');
+        $users = User::where('status','active')->get(['id','name','backtoback','backtoback_id','posname']);
+        return Inertia::render('User/Create', [
+            'userManager' => $userManager,
+            'department' => $department,
+            'position' => $position,
+            'users' => $users
+        ]);
     }
 
     /**
@@ -53,26 +70,72 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name' => ['required','string', 'max:255'],
+            'email' => ['required','string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
-            'department' => ['required', 'max:220'],
-            'posname' => ['required', 'max:220'],
-            'status' => ['required', 'max:50'],
-            'suppervisor' => ['required', 'max:220'],
-            'suppervisor_id' => ['required', 'max:50']
+            'nik' => ['required','string', 'max:255'],
+            'suppervisor' => ['required'],
+            'suppervisor_posname' => ['required'],
+            'suppervisor_id' => ['required'],
+            'position_category' => ['required'],
+            'department' => ['required'],
+            'department_code' => ['required'],
+            'posname' => ['required'],
+            'poscode' => ['required'],
+            'status' => ['required'],
+            'expiredcontractdate' => ['required'],
+            'posstatus' => ['required'],
+            'sex' => ['required'],
+            'birthdate' => ['required'],
+            'religion' => ['required'],
+            'married' => ['required'],
+            'bankkey' => ['required'],
+            'bank' => ['required'],
+            'address' => [ 'max:500'],
+        ],[
+            'bankkey.required' => 'Bank Number Field Is Required',
+            'bank.required' => 'Bank Field Is Required',
+            'posstatus.required' => 'Status Employee Field Is Required',
         ]);
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'department' => $request->department,
-            'posname' => $request->posname,
-            'status' => $request->status,
-            'suppervisor' => $request->suppervisor,
-            'suppervisor_id' => $request->suppervisor_id
-        ]);
-        return Redirect::route('users.index');
+
+        $data = [
+            'name' => $request->name ,
+            'email' => $request->email ,
+            'nik' => $request->nik ,
+            'password' => Hash::make($request->password) ,
+            'suppervisor' => $request->suppervisor ,
+            'suppervisor_posname' => $request->suppervisor_posname ,
+            'suppervisor_id' => $request->suppervisor_id ,
+            'position_category' => '' ,
+            'department' => $request->department ,
+            'department_code' => $request->department_code ,
+            'posname' => $request->posname ,
+            'poscode' => $request->poscode ,
+            'status' => 'active' ,
+            'expiredcontractdate' => Carbon::parse($request->expiredcontractdate)->format('Y-m-d H:i:s') ,
+            'posstatus' => 'pekerja' ,
+            'sex' => $request->sex ,
+            'birthdate' => Carbon::parse($request->birthdate)->format('Y-m-d H:i:s') ,
+            'religion' => $request->religion ,
+            'spouse' => $request->spouse ,
+            'child1' => $request->child1 ,
+            'child2' => $request->child2 ,
+            'child3' => $request->child3 ,
+            'married' => $request->married ,
+            'state' => $request->state ,
+            'city' => $request->city ,
+            'phonenum' => $request->phonenum ,
+            'bankkey' => $request->bankkey ,
+            'address' => $request->address ,
+            'backtoback' => $request->backtoback ,
+            'backtoback_id' => $request->backtoback_id ,
+            'postalcode' => $request->postalcode ,
+            'bank' => $request->bank
+        ];
+
+        User::create($data);
+
+        return Redirect::route('users.index')->with('message', 'User Successfully Registered');
     }
 
     /**
@@ -84,7 +147,11 @@ class UserController extends Controller
     public function show(User $user)
     {
         $role = Role::where('user_id',$user->id)->get();
-        return Inertia::render('User/Show', ['userdetail' => $user,'roles' => $role]);
+        return Inertia::render('User/Show', [
+            'userdetail' => $user,
+            'roles' => $role,
+            'darimana' => 'admin'
+        ]);
     }
 
     /**
@@ -107,7 +174,8 @@ class UserController extends Controller
             'userManager' => $userManager,
             'department' => $department,
             'position' => $position,
-            'users' => $users
+            'users' => $users,
+            'darimana' => 'admin'
         ]);
     }
 
@@ -198,5 +266,12 @@ class UserController extends Controller
         $user->save();
         return redirect()->back();
 
+    }
+
+    public function deactiveUser(Request $request){
+        $user = User::find($request->id);
+        $user->status = 'nonactive';
+        $user->save();
+        return redirect()->back();
     }
 }

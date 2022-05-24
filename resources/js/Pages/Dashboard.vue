@@ -9,7 +9,7 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <welcome :assignment="assignment" />
+                    <welcome :assignment="assignment" :absen="absen" />
                 </div>
             </div>
         </div>
@@ -22,13 +22,13 @@
     import Welcome from '@/Jetstream/Welcome.vue'
 
     export default defineComponent({
-        props:['assignment'],
+        props:['assignment','absen'],
         components: {
             AppLayout,
             Welcome,
         },
         mounted() {
-          console.log(this.assignment);
+
         },
     })
 </script>

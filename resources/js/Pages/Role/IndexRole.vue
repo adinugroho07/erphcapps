@@ -87,7 +87,7 @@
                 <td
                   class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
                 >
-                  <Link :href="'roleheader/' + role.id">
+                  <Link :href="route('roleheader.show',role.id)">
                     <jet-button
                       class="mr-1 bg-cyan-500 hover:bg-cyan-600"
                       title="Show"
@@ -98,7 +98,7 @@
                     </jet-button>
                   </Link>
 
-                  <Link :href="'roleheader/' + role.id + '/edit'">
+                  <Link :href="route('roleheader.edit',role.id)">
                     <jet-button
                       class="mr-1 bg-teal-500 hover:bg-teal-600"
                       title="Edit"

@@ -1,5 +1,5 @@
 <template>
-  <app-layout title="Dashboard">
+  <app-layout title="Dashboard" pathImage="../../image/logo.png">
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         All TimeSheet List
@@ -106,10 +106,10 @@ export default defineComponent({
   },
   methods: {
     searching() {
-      this.searchValue.post('/applicant/search', {
+      this.searchValue.post(route('searchtimesheet'), {
         preserveScroll: false,
         onSuccess: () => {
-          this.form.reset('search')
+          this.searchValue.reset('search')
         }
       });
     }

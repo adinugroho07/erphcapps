@@ -19,6 +19,11 @@ class CutiController extends Controller
 
     use WorkflowTraits;
 
+    public function __construct()
+    {
+        $this->authorizeResource(Cuti::class, 'cuti');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -30,6 +35,14 @@ class CutiController extends Controller
         $cuti = Cuti::where('created_byid',$id)->paginate(7);
         return Inertia::render('Cuti/CutiIndex',[
             'cuti' => $cuti
+        ]);
+    }
+
+    public function search()
+    {
+        $cuti = Cuti::latest()->where('created_byid',Auth::id())->search(request(['search']))->paginate(7);
+        return Inertia::render('Cuti/CutiIndex', [
+            'cuti' => $cuti,
         ]);
     }
 
@@ -49,7 +62,7 @@ class CutiController extends Controller
             //if null then
             $setCodeCuti = 'LVE1';
         }
-        $assignment = Assignment::where('isactive',1)->get();;
+        $assignment = Assignment::where('isactive',1)->get();
         $jatahcuti = Jatahcuti::where('user_id',Auth::id())->first();
         return Inertia::render('Cuti/CutiCreate',[
             'codecuti' => $setCodeCuti,
@@ -207,7 +220,7 @@ class CutiController extends Controller
     {
         $cuti->attachment1 = $cuti->attachment1 == '' ? '':asset( 'storage/'.$cuti->attachment1);
         $cuti->attachment2 = $cuti->attachment2 == '' ? '':asset( 'storage/'.$cuti->attachment2);
-        $assignment = Assignment::where('isactive',1)->get();;
+        $assignment = Assignment::where('isactive',1)->get();
         $wfassignment = Wfassignment::where('assignstatus', 'ACTIVE')->where('ownertrxid',$cuti->id)->first();
         $cutihistory = Cutihistory::where('ownertrxid',$cuti->id)->get();
         return Inertia::render('Cuti/CutiShow',[
@@ -219,12 +232,15 @@ class CutiController extends Controller
     }
 
     public function showApprovalPage($id){
+
+        $this->authorize('approveShow', Cuti::class);
+
         $cuti = Cuti::find($id);
 
         $cuti->attachment1 = $cuti->attachment1 == '' ? '':asset( 'storage/'.$cuti->attachment1);
         $cuti->attachment2 = $cuti->attachment2 == '' ? '':asset( 'storage/'.$cuti->attachment2);
         $assignmentnow = Wfassignment::where('assignstatus', 'ACTIVE')->where('ownertrxid',$cuti->id)->first();
-        $assignment = Assignment::where('isactive',1)->get();;
+        $assignment = Assignment::where('isactive',1)->get();
         $doahistory = Cutihistory::where('ownertrxid',$cuti->id)->get();
         return Inertia::render('Cuti/CutiApproval',[
             'cuti' => $cuti,
@@ -235,6 +251,9 @@ class CutiController extends Controller
     }
 
     public function storeApproval(Request $request){
+
+        $this->authorize('approveStore', Cuti::class);
+
         $request->validate([
             'cuticode' => ['required'],
             'status' => ['required'],

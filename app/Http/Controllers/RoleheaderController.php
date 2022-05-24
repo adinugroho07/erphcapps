@@ -12,6 +12,12 @@ use Inertia\Inertia;
 
 class RoleheaderController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Roleheader::class, 'roleheader');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,8 +31,8 @@ class RoleheaderController extends Controller
 
     public function search(){
 
-        $roles = Roleheader::latest()->search(request(['search']))->paginate(7);
-        return Inertia::render('Role/IndexRole', compact('roles'));
+        $roleheader = Roleheader::latest()->search(request(['search']))->paginate(7);
+        return Inertia::render('Role/IndexRole', compact('roleheader'));
     }
 
     /**

@@ -54,17 +54,17 @@
                   <span class="px-2 inline-flex text-xs leading-5  text-green-800"> {{ assignment.assignment_code }} </span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <Link :href="'timesheet/' + assignment.id">
+                  <Link :href="route('timesheet.show', assignment.id)">
                     <jet-button class="mr-1 bg-cyan-500 hover:bg-cyan-600">
                       Show
                     </jet-button>
                   </Link>
-                  <Link v-show="assignment.status !== 'COMPLETE'" :href="'/assignment/' + assignment.id + '/timesheet/approval/'">
+                  <Link v-show="assignment.status !== 'COMPLETE'" :href="route('timesheet.edit', assignment.id)">
                     <jet-button class="mr-1 bg-cyan-500 hover:bg-cyan-600">
                       Route
                     </jet-button>
                   </Link>
-                  <Link v-show="assignment.status === 'HOLD' || assignment.status === 'DRAFT'" :href="'/timesheet/' + assignment.id + '/edit'">
+                  <Link v-show="assignment.status === 'HOLD' || assignment.status === 'DRAFT'" :href="route('assigntimesheet.show', assignment.id)">
                     <jet-button class="mr-1 bg-cyan-500 hover:bg-cyan-600">
                       Edit
                     </jet-button>
@@ -112,10 +112,10 @@ export default defineComponent({
   },
   methods: {
     searching() {
-      this.searchValue.post('/applicant/search', {
+      this.searchValue.post(route('searchtimesheetwithactivelogin'), {
         preserveScroll: false,
         onSuccess: () => {
-          this.form.reset('search')
+          this.searchValue.reset('search')
         }
       });
     }

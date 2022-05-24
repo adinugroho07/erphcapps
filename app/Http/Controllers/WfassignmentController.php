@@ -9,6 +9,12 @@ use Inertia\Inertia;
 
 class WfassignmentController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Wfassignment::class, 'wfassignment');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,6 +25,16 @@ class WfassignmentController extends Controller
         $wfassignment = Wfassignment::where('assignstatus','ACTIVE')->paginate(7);
         $userManagerUp = User::where('status','active')->whereIn('position_category', array('VP','MGR','GM','RECRUITER'))->get();
         return Inertia::render('Assignment/ActiveAssignment',[
+            'wfassignment' => $wfassignment,
+            'listuser' => $userManagerUp
+        ]);
+    }
+
+    public function search()
+    {
+        $wfassignment = Wfassignment::latest()->where('assignstatus','ACTIVE')->search(request(['search']))->paginate(7);
+        $userManagerUp = User::where('status','active')->whereIn('position_category', array('VP','MGR','GM','RECRUITER'))->get();
+        return Inertia::render('Assignment/ActiveAssignment', [
             'wfassignment' => $wfassignment,
             'listuser' => $userManagerUp
         ]);
@@ -65,6 +81,14 @@ class WfassignmentController extends Controller
     public function edit(Wfassignment $wfassignment)
     {
 
+    }
+
+    public function deactiveAssignment(Request $request){
+
+        Wfassignment::where('assignstatus','ACTIVE')->where('id',$request->id)->where('codetransaction',$request->codetransaction)->update([
+            'assignstatus' => 'NONACTIVE'
+        ]);
+        return redirect()->back()->with('message','Deactive Assignment Successfully');
     }
 
     /**

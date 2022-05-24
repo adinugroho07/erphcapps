@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class AssignmentControllerBckp extends Controller
+class AssignmentController extends Controller
 {
 
     public function __construct()
@@ -26,6 +26,15 @@ class AssignmentControllerBckp extends Controller
     {
         $assignment = Assignment::paginate(7);
         return Inertia::render('Assignment/ListAssignment',[
+            'assignmentlist' => $assignment,
+        ]);
+    }
+
+    public function search()
+    {
+        $assignment = Assignment::latest()->search(request(['search']))->paginate(7);
+
+        return Inertia::render('Assignment/ListAssignment', [
             'assignmentlist' => $assignment,
         ]);
     }
@@ -51,7 +60,6 @@ class AssignmentControllerBckp extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'assignment_code' => ['required','unique:App\Models\Assignment,assignment_code'],
             'assignment_name' => ['required','max:100'],
@@ -94,30 +102,28 @@ class AssignmentControllerBckp extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Assignment  $assignment
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Assignment $assignment)
     {
-        $assignment = Assignment::find($id);
-        $assignmentdetail = Assignmentdetail::where('assignment_id', $id)->get();
+        $assignmentdetail = Assignmentdetail::where('assignment_id', $assignment->id)->get();
         return Inertia::render('Assignment/ShowAssignment',[
-           'assignment' => $assignment,
-           'assignmentdetail' => $assignmentdetail
+            'assignment' => $assignment,
+            'assignmentdetail' => $assignmentdetail
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Assignment  $assignment
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Assignment $assignment)
     {
         $userManagerUp = User::where('status','active')->whereIn('position_category', array('VP','MGR','GM','RECRUITER'))->get();
-        $assignment = Assignment::find($id);
-        $assignmentdetail = Assignmentdetail::where('assignment_id', $id)->get();
+        $assignmentdetail = Assignmentdetail::where('assignment_id', $assignment->id)->get();
         return Inertia::render('Assignment/EditAssignment',[
             'assignment' => $assignment,
             'assignmentdetail' => $assignmentdetail,
@@ -129,10 +135,10 @@ class AssignmentControllerBckp extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Assignment  $assignment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Assignment $assignment)
     {
         $request->validate([
             'assignment_code' => ['required'],
@@ -143,20 +149,20 @@ class AssignmentControllerBckp extends Controller
             'rowData.required' => 'Please Add Assignment Detail Atleast One'
         ]);
 
-        Assignment::where('id',$id)->update([
-            'assignment_code' => $request->assignment_code,
-            'assignment_name' => $request->assignment_name,
-            'assignment_description' => $request->assignment_description,
-            'isactive' => $request->isactive
-        ]);
+
+        $assignment->assignment_code = $request->assignment_code;
+        $assignment->assignment_name = $request->assignment_name;
+        $assignment->assignment_description = $request->assignment_description;
+        $assignment->isactive = $request->isactive;
+        $assignment->save();
 
         //delete ing assignment detail
-        Assignmentdetail::where('assignment_id',$id)->delete();
+        Assignmentdetail::where('assignment_id',$assignment->id)->delete();
 
         $data = [];
         foreach ($request->rowData as $value){
             $data[] = [
-                'assignment_id' => $id,
+                'assignment_id' => $assignment->id,
                 'assignment_code' => $request->assignment_code,
                 'assignment_description' => $value['assignment_description'],
                 'sequence' => $value['sequence'],
@@ -179,10 +185,10 @@ class AssignmentControllerBckp extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Assignment  $assignment
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Assignment $assignment)
     {
         //
     }

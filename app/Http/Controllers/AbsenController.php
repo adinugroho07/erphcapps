@@ -5,10 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Absen;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class AbsenController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Absen::class, 'absenrsc');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,19 +23,38 @@ class AbsenController extends Controller
      */
     public function index()
     {
-        $absen = Absen::paginate(7);
+        $absen = Absen::where('user_id',Auth::id())->paginate(7);
         return Inertia::render('AbsenPage/AbsenList', [
+            'absenlist' => $absen,
+        ]);
+    }
+
+    public function viewDataAllAbsen(){
+
+        $this->authorize('DataAbsenAll', Absen::class);
+
+        $absen = Absen::paginate(7);
+        return Inertia::render('AbsenPage/AbsenListAll', [
             'absenlist' => $absen,
         ]);
     }
 
     public function search()
     {
-        $absen = Absen::latest()->search(request(['search']))->paginate(7)->withQueyrString();
+        $absen = Absen::latest()->search(request(['search']))->paginate(7);
 
         return Inertia::render('AbsenPage/AbsenList', [
-        'absenlist' => $absen,
-    ]);
+            'absenlist' => $absen,
+        ]);
+    }
+
+    public function searchWithActiveLogin()
+    {
+        $absen = Absen::latest()->where('user_id', Auth::id())->search(request(['search']))->paginate(7);
+
+        return Inertia::render('AbsenPage/AbsenList', [
+            'absenlist' => $absen,
+        ]);
     }
 
     public function showOrgChart(){

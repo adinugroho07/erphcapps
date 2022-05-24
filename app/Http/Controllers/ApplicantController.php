@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 
-class ApplicantControllerBckp extends Controller
+class ApplicantController extends Controller
 {
 
     use WorkflowTraits;
@@ -42,7 +42,7 @@ class ApplicantControllerBckp extends Controller
 
     public function search()
     {
-        $applicant = Applicant::latest()->search(request(['search']))->paginate(7)->withQueyrString();
+        $applicant = Applicant::latest()->search(request(['search']))->paginate(7);
         return Inertia::render('Recruitment/ListRecruitment', [
             'applicantlist' => $applicant,
         ]);

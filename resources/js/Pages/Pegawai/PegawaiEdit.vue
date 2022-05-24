@@ -1,5 +1,5 @@
 <template>
-  <app-layout title="Dashboard">
+  <app-layout title="Dashboard" pathImage="../../image/logo.png">
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         Pegawai Dashboard
@@ -85,19 +85,8 @@
 
               <!-- Nik -->
               <div class="col-span-6 sm:col-span-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
+                <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
                 <jet-label
                   for="nik"
@@ -133,6 +122,7 @@
                     :selected="form.status === option.value"
                     :key="option.value"
                     :value="option.value"
+                    :disabled="darimana === 'pegawai'"
                   >
                     {{ option.text }}
                   </option>
@@ -156,87 +146,13 @@
                     :selected="form.posstatus === option.value"
                     :key="option.value"
                     :value="option.value"
+                    :disabled="darimana === 'pegawai'"
                   >
                     {{ option.text }}
                   </option>
                 </select>
               </div>
 
-              <!-- Department -->
-              <div class="col-span-6 sm:col-span-3">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
-                  />
-                </svg>
-                <jet-label
-                  for="department"
-                  value="Department"
-                  class="font-semibold text-base"
-                />
-                <select
-                  id="department"
-                  name="department"
-                  v-model="form.department"
-                  class="mt-2 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                >
-                  <option
-                    v-for="option in department"
-                    :selected="form.department_code === option.org_code"
-                    :key="option.org_code"
-                    :value="option.org_name"
-                  >
-                    {{ option.org_name }}
-                  </option>
-                </select>
-              </div>
-
-              <!-- Posname -->
-              <div class="col-span-6 sm:col-span-3">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-                  />
-                </svg>
-                <jet-label
-                  for="posname"
-                  value="Position"
-                  class="font-semibold text-base"
-                />
-                <select
-                  id="posname"
-                  name="posname"
-                  v-model="form.posname"
-                  class="mt-2 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                >
-                  <option
-                    v-for="option in selectionPosition"
-                    :selected="form.poscode === option.position_code"
-                    :key="option.position_code"
-                    :value="option.position_title"
-                  >
-                    {{ option.position_title }}
-                  </option>
-                </select>
-              </div>
 
               <!-- Supervisor -->
               <div class="col-span-6 sm:col-span-5">
@@ -380,15 +296,8 @@
                   value="Expired Contract Pegawai"
                   class="font-semibold text-base"
                 />
-                <div class="mt-1 flex items-center justify-center">
-                  <div class="datepicker relative form-floating xl:w-96" data-mdb-toggle-button="false">
-                    <input type="text"
-                           id="expiredcontractdate"
-                           v-model="form.expiredcontractdate"
-                           class="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                           placeholder="Select a date" data-mdb-toggle="datepicker" />
-                  </div>
-                </div>
+                <jet-input id="expiredcontractdate" v-show="form.posstatus === 'pekerja'" type="text" class="mt-1 block w-full" value="Does Not Have An Expiration Date" disabled />
+                <jet-input id="expiredcontractdate" v-show="form.posstatus === 'mitra'" type="date" class="mt-1 block w-full" v-model="form.expiredcontractdate" />
               </div>
 
               <!-- birthdate-->
@@ -578,7 +487,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
-                <jet-label for="spouse" value="Istri" class="font-semibold text-base"/>
+                <jet-label for="spouse" value="Spouse" class="font-semibold text-base"/>
                 <jet-input
                   id="spouse"
                   type="text"
@@ -592,7 +501,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
                 </svg>
-                <jet-label for="child1" value="Anak Pertama" class="font-semibold text-base"/>
+                <jet-label for="child1" value="Child 1" class="font-semibold text-base"/>
                 <jet-input
                   id="child1"
                   type="text"
@@ -606,7 +515,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
                 </svg>
-                <jet-label for="child2" value="Anak Kedua" class="font-semibold text-base"/>
+                <jet-label for="child2" value="Child 2" class="font-semibold text-base"/>
                 <jet-input
                   id="child2"
                   type="text"
@@ -620,7 +529,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
                 </svg>
-                <jet-label for="child3" value="Anak Ketiga" class="font-semibold text-base"/>
+                <jet-label for="child3" value="Child 3" class="font-semibold text-base"/>
                 <jet-input
                   id="child3"
                   type="text"
@@ -641,7 +550,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
                 </svg>
-                <jet-label for="state" value="Provinsi" class="font-semibold text-base"/>
+                <jet-label for="state" value="Province" class="font-semibold text-base"/>
                 <jet-input
                   id="state"
                   type="text"
@@ -655,7 +564,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
-                <jet-label for="city" value="Kota" class="font-semibold text-base"/>
+                <jet-label for="city" value="City" class="font-semibold text-base"/>
                 <jet-input
                   id="city"
                   type="text"
@@ -669,7 +578,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
                 </svg>
-                <jet-label for="postalcode" value="Kode Pos" class="font-semibold text-base"/>
+                <jet-label for="postalcode" value="Postal Code" class="font-semibold text-base"/>
                 <jet-input
                   id="postalcode"
                   type="text"
@@ -683,7 +592,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
-                <jet-label for="address" value="Alamat" class="font-semibold text-base"/>
+                <jet-label for="address" value="Address" class="font-semibold text-base"/>
                 <textarea
                   id="address"
                   class="mt-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
@@ -734,7 +643,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
-                <jet-label for="phonenum" value="Nomor Handphone" class="font-semibold text-base"/>
+                <jet-label for="phonenum" value="Handphone Number" class="font-semibold text-base"/>
                 <jet-input
                   id="phonenum"
                   type="text"
@@ -746,9 +655,14 @@
             <!--detail -->
 
             <template #actions>
-              <Link href="/pegawai" class="float-left">
+              <Link v-show="darimana === 'pegawai'" href="/pegawai" class="float-left">
                 <jet-button class="bg-cyan-500 hover:bg-cyan-600"
                   >Back</jet-button
+                >
+              </Link>
+              <Link v-show="darimana === 'admin'" href="/users" class="float-left">
+                <jet-button class="bg-cyan-500 hover:bg-cyan-600"
+                >Back</jet-button
                 >
               </Link>
               <jet-button
@@ -808,7 +722,7 @@ export default defineComponent({
     CheckIcon,
     SelectorIcon,
   },
-  props: ["userdetail", "userManager", "department", "position", "users"],
+  props: ["userdetail", "userManager", "department", "position", "users",'darimana'],
   data() {
     return {
       form: this.$inertia.form({
@@ -881,12 +795,6 @@ export default defineComponent({
     };
   },
   computed: {
-    selectionPosition() {
-      let tempObj = this.position.find(
-        (u) => u.org_name === this.form.department
-      );
-      return this.position.filter((x) => x.org_code === tempObj.org_code);
-    },
     iSselectedb2bCmp() {
       if (
         this.userdetail.backtoback_id === "" ||
@@ -918,14 +826,11 @@ export default defineComponent({
       )
     },
     submit() {
-      let objtDept = this.department.find(
-        (u) => u.org_name === this.form.department
-      );
-      let objetPos = this.position.find(
-        (u) => u.position_title === this.form.posname
-      );
-      this.form.department_code = objtDept.org_code;
-      this.form.poscode = objetPos.position_code;
+      if (this.darimana === 'admin'){
+        if(this.form.posstatus === 'pekerja'){
+          this.form.expiredcontractdate = null
+        }
+      }
       this.form.suppervisor = this.selected.name;
       this.form.suppervisor_id = this.selected.id;
       this.form.suppervisor_posname = this.selected.posname;

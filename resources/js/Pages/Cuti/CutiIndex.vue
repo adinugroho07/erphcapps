@@ -69,12 +69,12 @@
                   <span class="px-2 inline-flex text-xs leading-5 text-green-800"> {{ objcuti.status }} </span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <Link :href="'cuti/' + objcuti.id">
+                  <Link :href="route('cuti.show',objcuti.id)">
                     <jet-button class="mr-1 bg-cyan-500 hover:bg-cyan-600">
                       Show
                     </jet-button>
                   </Link>
-                  <Link v-show="objcuti.status !== 'COMPLETE' || objcuti.status !== 'DRAFT' || objcuti.status !== 'HOLD'" :href="'/assignment/' + objcuti.id + '/cuti/approval/'">
+                  <Link v-show="objcuti.status !== 'COMPLETE' || objcuti.status !== 'DRAFT' || objcuti.status !== 'HOLD'" :href="route('assigncuti.show',objcuti.id)">
                     <jet-button class="mr-1 bg-cyan-500 hover:bg-cyan-600">
                       Route
                     </jet-button>
@@ -122,10 +122,10 @@ export default defineComponent({
   },
   methods: {
     searching() {
-      this.searchValue.post('/applicant/search', {
+      this.searchValue.post(route('searchcuti'), {
         preserveScroll: false,
         onSuccess: () => {
-          this.form.reset('search')
+          this.searchValue.reset('search')
         }
       });
     }

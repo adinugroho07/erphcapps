@@ -72,17 +72,17 @@
                   <span class="px-2 inline-flex text-xs leading-5 font-semibold text-green-800"> {{ applicant.status }} </span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <Link :href="'applicant/' + applicant.id">
+                  <Link :href="route('applicant.show', applicant.id)">
                     <jet-button class="mr-1 bg-cyan-500 hover:bg-cyan-600">
                       Show
                     </jet-button>
                   </Link>
-                  <Link v-show="applicant.status === 'HOLD' || applicant.status === 'DRAFT'" :href="'/applicant/' + applicant.id + '/edit'">
+                  <Link v-show="applicant.status === 'HOLD' || applicant.status === 'DRAFT'" :href="route('applicant.edit', applicant.id)">
                     <jet-button class="mr-1 bg-cyan-500 hover:bg-cyan-600">
                       Edit
                     </jet-button>
                   </Link>
-                  <Link v-show="applicant.status !== 'COMPLETE' || applicant.status !== 'DRAFT' || applicant.status !== 'HOLD'" :href="'/assignment/' + applicant.id + '/applicant/approval/'">
+                  <Link v-show="applicant.status !== 'COMPLETE' || applicant.status !== 'DRAFT' || applicant.status !== 'HOLD'" :href="route('assignapplicant.show', applicant.id)">
                     <jet-button class="mr-1 bg-cyan-500 hover:bg-cyan-600">
                       Route
                     </jet-button>
