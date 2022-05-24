@@ -9,8 +9,14 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class AssignmentController extends Controller
+class AssignmentControllerBckp extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Assignment::class, 'assignment');
+    }
+
     /**
      * Display a listing of the resource.
      *

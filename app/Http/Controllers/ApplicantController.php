@@ -9,6 +9,7 @@ use App\Models\Recruitmenthistory;
 use App\Models\User;
 use App\Models\Wfassignment;
 use App\Traits\WorkflowTraits;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -16,11 +17,15 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 
-class ApplicantController extends Controller
+class ApplicantControllerBckp extends Controller
 {
 
     use WorkflowTraits;
 
+    public function __construct()
+    {
+        $this->authorizeResource(Applicant::class, 'applicant');
+    }
 
     /**
      * Display a listing of the resource.
@@ -59,7 +64,7 @@ class ApplicantController extends Controller
             //if null then
             $setCodeApplicant = 'APLCNT1';
         }
-        $assignment = Assignment::where('isactive',1)->get();;
+        $assignment = Assignment::where('isactive',1)->get();
         $department = Organization::distinct()->get(['org_code','org_name']);
         $position = Organization::all('position_title','position_code','org_code','org_name');
         return Inertia::render('Recruitment/CreateRecruitment', [
@@ -71,6 +76,8 @@ class ApplicantController extends Controller
     }
 
     public function showApprovalPage($id){
+
+        $this->authorize('approveShow', Applicant::class);
 
         $applicant = Applicant::find($id);
 
@@ -94,6 +101,9 @@ class ApplicantController extends Controller
     }
 
     public function storeApproval(Request $request){
+
+        $this->authorize('approveStore', Applicant::class);
+
         $request->validate([
             'applicantcode' => ['required'],
             'status' => ['required'],
@@ -294,14 +304,20 @@ class ApplicantController extends Controller
     }
 
     public function showlistcreate(){
-        //$applicant = Applicant::where('status','APPR');
-        $applicant = Applicant::paginate(7);
+
+        $this->authorize('showListApplicantAppr', Applicant::class);
+
+        $applicant = Applicant::where('status','APPR')->paginate(7);
+        //$applicant = Applicant::paginate(7);
         return Inertia::render('Recruitment/ListRecruitmentCreateAccount',[
             'applicantlist' => $applicant,
         ]);
     }
 
     public function createUser(){
+
+        $this->authorize('showApplicantAppr', Applicant::class);
+
         $applicant = Applicant::find(request()->id);
         $user = User::where('status','active')->where('email',$applicant->email)->first();
 
@@ -324,6 +340,9 @@ class ApplicantController extends Controller
     }
 
     public function storeUser(Request $request){
+
+        $this->authorize('createUserFromApplicantAppr', Applicant::class);
+
         $request->validate([
             'name' => ['required','string', 'max:255'],
             'email' => ['required','string', 'email', 'max:255', 'unique:users'],
@@ -366,10 +385,10 @@ class ApplicantController extends Controller
             'posname' => $request->posname ,
             'poscode' => $request->poscode ,
             'status' => 'active' ,
-            'expiredcontractdate' => 'luxon' ,
+            'expiredcontractdate' => null ,
             'posstatus' => 'pekerja' ,
             'sex' => $request->sex ,
-            'birthdate' => $request->birthdate ,
+            'birthdate' => Carbon::parse($request->birthdate)->format('Y-m-d H:i:s') ,
             'religion' => $request->religion ,
             'spouse' => $request->spouse ,
             'child1' => $request->child1 ,
