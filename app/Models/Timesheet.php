@@ -35,10 +35,10 @@ class Timesheet extends Model
         //fungsi when adalah ketika hasil yang di dapat adalah true. jika true maka function akan di jalan kan.
         //jika false maka akan di skip function nya.
         $query->when($filters['search'] ?? false, function($query,$filters){
-            return $query->where('timesheetcode', 'like' , '%'.$filters.'%')
+            return $query->where('timesheetcode', '=' , $filters)
                 ->orWhere('assignment_code', 'like' , '%'.$filters.'%')
                 ->orWhere('description', 'like' , '%'.$filters.'%')
-                ->orWhere('status', 'like' , '%'.$filters.'%')
+                ->orWhere('status', '=' , $filters)
                 ->orWhere('createdby', 'like' , '%'.$filters.'%');
         });
 

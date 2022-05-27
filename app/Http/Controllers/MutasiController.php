@@ -40,7 +40,7 @@ class MutasiController extends Controller
 
     public function search()
     {
-        $mutasi = Mutasi::latest()->where('created_byid',Auth::id())->search(request(['search']))->paginate(7);
+        $mutasi = Mutasi::latest()->where('created_byid',Auth::id())->search(request(['search']))->paginate(7)->withQueryString();
 
         return Inertia::render('Mutasi/MutasiIndex', [
             'mutasi' => $mutasi,

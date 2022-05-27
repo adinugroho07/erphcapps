@@ -22,7 +22,7 @@ class Roleheader extends Model
         //fungsi when adalah ketika hasil yang di dapat adalah true. jika true maka function akan di jalan kan.
         //jika false maka akan di skip function nya.
         $query->when($filters['search'] ?? false, function($query,$filters){
-            return $query->where('rolecode', 'like' , '%'.$filters.'%')
+            return $query->where('rolecode', '=' , $filters)
                 ->orWhere('rolename', 'like' , '%'.$filters.'%')
                 ->orWhere('created_by', 'like' , '%'.$filters.'%')
                 ->orWhere('description', 'like' , '%'.$filters.'%');

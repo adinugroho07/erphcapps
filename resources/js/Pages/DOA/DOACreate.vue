@@ -28,6 +28,7 @@
                   for="status"
                   value="Status Document"
                   class="font-semibold text-base"
+                  :required="true"
                 />
                 <jet-input id="status" type="text" class="mt-2 block w-full" v-model="form.status" disabled/>
               </div>
@@ -41,6 +42,7 @@
                   for="applicantcode"
                   value="Doa Code"
                   class="font-semibold text-base"
+                  :required="true"
                 />
                 <jet-input id="applicantcode" type="text" class="mt-2 block w-full" v-model="form.doacode" disabled/>
               </div>
@@ -50,7 +52,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                 </svg>
-                <jet-label for="assignment" value="Assignment" class="font-semibold text-base"/>
+                <jet-label for="assignment" value="Assignment" class="font-semibold text-base" :required="true"/>
                 <select
                   id="assignment"
                   name="assignment"
@@ -81,7 +83,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
-                <jet-label for="justification" value="Justification" class="font-semibold text-base"/>
+                <jet-label for="justification" value="Justification" class="font-semibold text-base" :required="true"/>
                 <textarea
                   id="justification"
                   class="mt-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
@@ -113,6 +115,7 @@
                   for="created_by"
                   value="Created By"
                   class="font-semibold text-base"
+                  :required="true"
                 />
                 <jet-input id="created_by" type="text" class="mt-1 block w-full" v-model="form.created_by" disabled/>
                 <jet-input-error :message="form.errors.created_by" class="mt-2" />
@@ -137,7 +140,7 @@
                 </svg>
                 <Listbox v-model="selected" as="div" :disabled="!form.isedit">
                   <ListboxLabel class="block font-semibold text-base">
-                    Alias Original
+                    <span>Alias Original <i class="text-xs text-red-600">*Required</i></span>
                   </ListboxLabel>
                   <div class="mt-1 relative">
                     <ListboxButton
@@ -241,6 +244,7 @@
                   for="department"
                   value="Original Department"
                   class="font-semibold text-base"
+                  :required="true"
                 />
                 <jet-input id="oridepartment" type="text" class="mt-1 block w-full" v-model="form.oridepartment" disabled/>
                 <jet-input-error :message="form.errors.department" class="mt-2" />
@@ -267,6 +271,7 @@
                   for="posname"
                   value="Original Position"
                   class="font-semibold text-base"
+                  :required="true"
                 />
                 <jet-input id="oriposition" type="text" class="mt-1 block w-full" v-model="form.oriposition" disabled/>
                 <jet-input-error :message="form.errors.posname" class="mt-2" />
@@ -291,7 +296,7 @@
                 </svg>
                 <Listbox v-model="selectedActing" as="div" :disabled="!form.isedit">
                   <ListboxLabel class="block font-semibold text-base">
-                    Alias Acting
+                     <span>Alias Acting <i class="text-xs text-red-600">*Required</i></span>
                   </ListboxLabel>
                   <div class="mt-1 relative">
                     <ListboxButton
@@ -380,7 +385,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <jet-label for="start_date" value="Start Date" class="font-semibold text-base"/>
+                <jet-label for="start_date" value="Start Date" class="font-semibold text-base" :required="true"/>
                 <div class="mt-2 flex items-center justify-center">
                   <div class="datepicker relative form-floating xl:w-96" data-mdb-toggle-button="false">
                     <input type="date"
@@ -399,7 +404,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <jet-label for="end_date" value="End Date" class="font-semibold text-base"/>
+                <jet-label for="end_date" value="End Date" class="font-semibold text-base" :required="true"/>
                 <div class="mt-2 flex items-center justify-center">
                   <div class="datepicker relative form-floating xl:w-96" data-mdb-toggle-button="false">
                     <input type="date"

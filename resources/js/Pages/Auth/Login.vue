@@ -19,6 +19,7 @@
                     </div>
                     <form @submit.prevent="submit">
                       <p class="mb-4">Please login to your account</p>
+                      <jet-validation-errors class="mb-4" />
                       <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
                         {{ status }}
                       </div>
@@ -83,7 +84,6 @@
 
 <script>
     import { defineComponent } from 'vue'
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
     import JetButton from '@/Jetstream/Button.vue'
     import JetInput from '@/Jetstream/Input.vue'
@@ -95,7 +95,6 @@
     export default defineComponent({
         components: {
             Head,
-            JetAuthenticationCard,
             JetAuthenticationCardLogo,
             JetButton,
             JetInput,

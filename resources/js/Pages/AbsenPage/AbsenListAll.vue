@@ -2,7 +2,7 @@
   <app-layout title="Dashboard" pathImage="../image/logo.png">
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Absen List
+        Attendance List
       </h2>
     </template>
 
@@ -108,7 +108,7 @@
 
             <!-- memo -->
             <div class="mt-2">
-              <jet-label for="activity" value="Memo Approval" class="text-lg"/>
+              <jet-label for="activity" value="Daily Activities" class="text-lg"/>
               <textarea id="activity" class="mt-1 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="activity" rows="3" cols="62" v-model="modalValue.activity" ></textarea>
             </div>
 
@@ -170,7 +170,7 @@ export default defineComponent({
   },
   methods:{
     searching(){
-      this.searchValue.post(route('searchabsen'), {
+      this.searchValue.get(route('searchabsen'), {
         preserveScroll: false,
         onSuccess: () => {
           this.form.reset('search')

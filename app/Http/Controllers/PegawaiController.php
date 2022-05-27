@@ -31,7 +31,8 @@ class PegawaiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function search(){
-        $users = User::latest()->search(request(['search']))->paginate(7);
+
+        $users = User::latest()->search(request(['search']))->paginate(7)->withQueryString();
 
         return Inertia::render('Pegawai/PegawaiIndex', [
             'users' => $users,

@@ -445,10 +445,17 @@
               let classActive = '';
               const role = this.route().current('pegawai.*');
               const cuti = this.route().current('cuti.*');
+              const searchcuti = this.route().current('searchcuti');
+              const assigncuti = this.route().current('assigncuti.show');
               const doa = this.route().current('doa.*');
+              const searchdoa = this.route().current('searchdoa');
+              const assigndoa = this.route().current('assigndoa.show');
               const resign = this.route().current('resign.*');
+              const assignresign = this.route().current('assignresign.show');
               const mutasi = this.route().current('mutasi.*');
-              if(role || cuti || doa || resign || mutasi){
+              const searchmutasi = this.route().current('searchmutasi');
+              const assignmutasi = this.route().current('assignmutasi.show');
+              if(role || cuti || doa || resign || mutasi || searchcuti || searchdoa || searchmutasi || assigncuti || assigndoa || assignmutasi || assignresign){
                 classActive = 'mt-5 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition';
               } else {
                 classActive = 'mt-5 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition';
@@ -458,7 +465,10 @@
             getDataTimesheetIsActive(){
               let classActive = '';
               const timesheet = this.route().current('timesheet.*');
-              if(timesheet){
+              const searchtimesheet = this.route().current('searchtimesheet');
+              const searchtimesheetwithactivelogin = this.route().current('searchtimesheetwithactivelogin');
+              const assigntimesheet = this.route().current('assigntimesheet.show');
+              if(timesheet || searchtimesheet || assigntimesheet || searchtimesheetwithactivelogin){
                 classActive = 'mt-5 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition';
               } else {
                 classActive = 'mt-5 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition';
@@ -468,7 +478,9 @@
             getDataAttendanceIsActive(){
               let classActive = '';
               const timesheet = this.route().current('absenrsc.*');
-              if(timesheet){
+              const searchabsenwithactivelogin = this.route().current('searchabsenwithactivelogin');
+              const searchabsen = this.route().current('searchabsen');
+              if(timesheet || searchabsenwithactivelogin || searchabsen){
                 classActive = 'mt-5 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition';
               } else {
                 classActive = 'mt-5 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition';

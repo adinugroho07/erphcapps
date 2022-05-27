@@ -2,7 +2,7 @@
   <app-layout title="Dashboard" pathImage="../image/logo.png">
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Paid Leave Create Page
+        Paid Leave Show Page
       </h2>
     </template>
 

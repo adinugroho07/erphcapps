@@ -25,8 +25,8 @@
 
     <div :class="isDoneAbsen">
       <div class="mt-8 font-bold text-2xl mb-4">
-        <p v-if="absen">You Have Done Daily Absent Today</p>
-        <p v-else>You Haven't Done Your Daily Absent Today</p>
+        <p v-if="absen">You Have Done Daily Attendance Today</p>
+        <p v-else>You Haven't Done Your Daily Attendance Today</p>
       </div>
 
       <Link v-show="!absen" :href="route('absenrsc.create')">
@@ -34,7 +34,7 @@
           class="mr-1 bg-cyan-500 hover:bg-cyan-600"
           title="Go To Module"
         >
-          Go To Absen Page
+          Go To Attendance Page
         </jet-button>
       </Link>
     </div>

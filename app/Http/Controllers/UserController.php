@@ -34,8 +34,7 @@ class UserController extends Controller
     }
 
     public function search(){
-        $users = User::latest()->search(request(['search']))->paginate(7);
-
+        $users = User::latest()->search(request(['search']))->paginate(7)->withQueryString();
         return Inertia::render('User/Index', [
             'users' => $users,
         ]);

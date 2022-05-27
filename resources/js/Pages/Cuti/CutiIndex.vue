@@ -122,7 +122,7 @@ export default defineComponent({
   },
   methods: {
     searching() {
-      this.searchValue.post(route('searchcuti'), {
+      this.searchValue.get(route('searchcuti'), {
         preserveScroll: false,
         onSuccess: () => {
           this.searchValue.reset('search')

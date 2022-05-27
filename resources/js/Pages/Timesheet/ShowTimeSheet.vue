@@ -90,6 +90,18 @@
                       </select>
                       <jet-input-error :message="form.errors.assignment_id" class="mt-2" />
                     </div>
+                    <!-- assignperson -->
+                    <div class="col-span-1 sm:col-span-1 mt-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                      </svg>
+                      <jet-label
+                        for="assignperson"
+                        value="Assignment For"
+                        class="font-semibold text-base"
+                      />
+                      <jet-input id="assignperson" type="text" class="mt-2 block w-full" v-model="compAssignperson" disabled/>
+                    </div>
 
 
                   </div>
@@ -190,6 +202,19 @@
                       <jet-label for="description" value="Descriptions" class="font-semibold text-base"/>
                       <textarea id="description" disabled v-model="form.description"  class="mt-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="address" rows="3" cols="77" ></textarea>
                       <jet-input-error :message="form.errors.description" class="mt-2" />
+                    </div>
+
+                    <!-- total hour -->
+                    <div class="col-span-6 sm:col-span-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <jet-label
+                        for="totalhour"
+                        value="Total Hours In This Period"
+                        class="font-semibold text-base"
+                      />
+                      <jet-input id="totalhour" type="text"  class="mt-2 block w-full" v-model="getTotalHour" disabled/>
                     </div>
 
                     <div class="col-span-6 sm:col-span-6" >
@@ -499,7 +524,7 @@ export default defineComponent({
     JetSecondaryButton,
     Link,
   },
-  props:['timesheet','timesheetdetail','timesheethistory','assignment'],
+  props:['timesheet','timesheetdetail','timesheethistory','assignment','assignmentnow'],
   data(){
     return{
       form: this.$inertia.form({
@@ -563,6 +588,21 @@ export default defineComponent({
       }
       return this.nonactive;
     },
+    compAssignperson(){
+      console.log(this.assignmentnow);
+      if (this.assignmentnow === null){
+        return 'There Is No Approval';
+      } else {
+        return this.assignmentnow.assignperson;
+      }
+    },
+    getTotalHour(){
+      let totalhour = 0;
+      this.timesheetdetail.forEach( (element) => {
+        totalhour = element.totalhours + totalhour;
+      });
+      return totalhour+' Hours';
+    }
   },
   methods:{
     toggle(action){

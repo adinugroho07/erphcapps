@@ -340,6 +340,7 @@ export default defineComponent({
       }
     },
     openModal(objectassignment){
+      console.log(objectassignment);
       this.show = true;
       this.form.id = objectassignment.id;
       this.form.assignment_code   = objectassignment.assignment_code;
@@ -374,7 +375,7 @@ export default defineComponent({
       });
     },
     searching() {
-      this.searchValue.post(route('searchwfassignment'), {
+      this.searchValue.get(route('searchwfassignment'), {
         preserveScroll: false,
         onSuccess: () => {
           this.searchValue.reset('search')

@@ -59,12 +59,12 @@
                       Show
                     </jet-button>
                   </Link>
-                  <Link v-show="assignment.status !== 'COMPLETE'" :href="route('timesheet.edit', assignment.id)">
+                  <Link v-show="assignment.status !== 'COMPLETE'" :href="route('assigntimesheet.show', assignment.id)">
                     <jet-button class="mr-1 bg-cyan-500 hover:bg-cyan-600">
                       Route
                     </jet-button>
                   </Link>
-                  <Link v-show="assignment.status === 'HOLD' || assignment.status === 'DRAFT'" :href="route('assigntimesheet.show', assignment.id)">
+                  <Link v-show="assignment.status === 'HOLD' || assignment.status === 'DRAFT'" :href="route('timesheet.edit', assignment.id)">
                     <jet-button class="mr-1 bg-cyan-500 hover:bg-cyan-600">
                       Edit
                     </jet-button>
@@ -112,7 +112,7 @@ export default defineComponent({
   },
   methods: {
     searching() {
-      this.searchValue.post(route('searchtimesheetwithactivelogin'), {
+      this.searchValue.get(route('searchtimesheetwithactivelogin'), {
         preserveScroll: false,
         onSuccess: () => {
           this.searchValue.reset('search')

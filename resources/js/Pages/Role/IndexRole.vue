@@ -164,7 +164,7 @@ export default defineComponent ({
     });
 
     const searching = () => {
-        searchValue.post('/role/search',{
+        searchValue.get(route('searchrole'),{
             preserveScroll: true,
             onSuccess: () => searchValue.reset('search'),
         })

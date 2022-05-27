@@ -42,7 +42,7 @@ class Doa extends Model
                 ->orWhere('alias', 'like' , '%'.$filters.'%')
                 ->orWhere('alias_acting', 'like' , '%'.$filters.'%')
                 ->orWhere('created_by', 'like' , '%'.$filters.'%')
-                ->orWhere('status', 'like' , '%'.$filters.'%');
+                ->orWhere('status', '=' , $filters);
         });
 
     }

@@ -3,13 +3,27 @@
 
     <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
         <div v-if="canLogin" class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-            <Link v-if="$page.props.user" :href="route('dashboard')" class="text-sm text-gray-700 underline">
-                Dashboard
+            <Link v-if="$page.props.user" :href="route('dashboard')" class="text-sm text-gray-700">
+              <jet-button
+                class="mr-1 bg-purple-500 hover:bg-purple-600"
+                title="Edit"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 13v-1m4 1v-3m4 3V8M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                </svg> Dashboard
+              </jet-button>
             </Link>
 
             <template v-else>
-                <Link :href="route('login')" class="text-sm text-gray-700 underline">
-                    Log in
+                <Link :href="route('login')" class="text-sm text-gray-700">
+                  <jet-button
+                    class="mr-1 bg-blue-500 hover:bg-blue-600"
+                    title="Login"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                    </svg> Log in
+                  </jet-button>
                 </Link>
             </template>
         </div>
@@ -104,11 +118,13 @@
 <script>
     import { defineComponent } from 'vue'
     import { Head, Link } from '@inertiajs/inertia-vue3';
+    import JetButton from '@/Jetstream/Button.vue';
 
     export default defineComponent({
         components: {
             Head,
             Link,
+            JetButton
         },
 
         props: {

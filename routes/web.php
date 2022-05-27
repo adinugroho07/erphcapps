@@ -105,17 +105,17 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::resource('roleheader', RoleheaderController::class);
 
     //search
-    Route::post('role/search', [RoleheaderController::class, 'search'])->name('searchrole');
-    Route::post('applicant/search', [ApplicantController::class, 'search'])->name('searchapplicant');
-    Route::post('mutasi/search', [MutasiController::class, 'search'])->name('searchmutasi');
-    Route::post('timesheet/search', [TimesheetController::class, 'search'])->name('searchtimesheet');
-    Route::post('timesheet/searchwithactivelogin', [TimesheetController::class, 'searchWithActiveLogin'])->name('searchtimesheetwithactivelogin');
-    Route::post('doa/search', [DoaController::class, 'search'])->name('searchdoa');
-    Route::post('users/search', [UserController::class, 'search'])->name('searchusers');
-    Route::post('pegawai/search', [PegawaiController::class, 'search'])->name('searchpegawai');
-    Route::post('cuti/search', [CutiController::class, 'search'])->name('searchcuti');
-    Route::post('assignment/search', [AssignmentController::class, 'search'])->name('searchassignment');
-    Route::post('wfassignment', [WfassignmentController::class, 'search'])->name('searchwfassignment');
+    Route::get('/searchrole', [RoleheaderController::class, 'search'])->name('searchrole');
+    Route::get('/searchapplicant', [ApplicantController::class, 'search'])->name('searchapplicant');
+    Route::get('/searchmutasi', [MutasiController::class, 'search'])->name('searchmutasi');
+    Route::get('/searchtimesheet', [TimesheetController::class, 'search'])->name('searchtimesheet');
+    Route::get('/searchWithActiveLogin', [TimesheetController::class, 'searchWithActiveLogin'])->name('searchtimesheetwithactivelogin');
+    Route::get('/searchdoa', [DoaController::class, 'search'])->name('searchdoa');
+    Route::get('/searchusers', [UserController::class, 'search'])->name('searchusers');
+    Route::get('/searchpegawai', [PegawaiController::class, 'search'])->name('searchpegawai');
+    Route::get('/searchcuti', [CutiController::class, 'search'])->name('searchcuti');
+    Route::get('/searchassignment', [AssignmentController::class, 'search'])->name('searchassignment');
+    Route::get('/searchwfassignment', [WfassignmentController::class, 'search'])->name('searchwfassignment');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
@@ -129,8 +129,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::resource('absenrsc' , AbsenController::class);
-    Route::post('search', [AbsenController::class, 'search'])->name('searchabsen');
-    Route::post('searchwithactivelogin', [AbsenController::class, 'searchWithActiveLogin'])->name('searchabsenwithactivelogin');
+    Route::get('search', [AbsenController::class, 'search'])->name('searchabsen');
+    Route::get('searchwithactivelogin', [AbsenController::class, 'searchWithActiveLogin'])->name('searchabsenwithactivelogin');
     Route::get('allabsen',[AbsenController::class, 'viewDataAllAbsen'])->name('absenrsc.all');
 });
 

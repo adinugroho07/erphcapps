@@ -127,7 +127,7 @@ export default defineComponent({
   },
   methods: {
     searching() {
-      this.searchValue.post(route('searchdoa'), {
+      this.searchValue.get(route('searchdoa'), {
         preserveScroll: false,
         onSuccess: () => {
           this.searchValue.reset('search')

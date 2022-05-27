@@ -2,7 +2,7 @@
   <app-layout title="Dashboard" pathImage="../../image/logo.png">
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Absen Page
+        Roles Page
       </h2>
     </template>
 
@@ -53,9 +53,9 @@
               <!-- Assignment Detail -->
               <div class="col-span-6 sm:col-span-6">
                 <jet-button type="button" @click="openModal" class="mb-2 bg-cyan-500 hover:bg-cyan-600">
-                  Add Data Assignment Detail
+                  Assign User To This Role
                 </jet-button>
-                <jet-label for="history" value="Assignment Detail" class="mb-1"/>
+                <jet-label for="history" value="User Assigned To This Roles" class="mb-1"/>
                 <div id="history" class="shadow overflow-auto border-b border-gray-200 sm:rounded-lg">
                   <table class="min-w-full divide-y divide-gray-200 ">
                     <thead class="bg-gray-50">

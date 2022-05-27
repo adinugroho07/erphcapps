@@ -40,7 +40,7 @@ class CutiController extends Controller
 
     public function search()
     {
-        $cuti = Cuti::latest()->where('created_byid',Auth::id())->search(request(['search']))->paginate(7);
+        $cuti = Cuti::latest()->where('created_byid',Auth::id())->search(request(['search']))->paginate(7)->withQueryString();
         return Inertia::render('Cuti/CutiIndex', [
             'cuti' => $cuti,
         ]);

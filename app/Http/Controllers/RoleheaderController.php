@@ -31,7 +31,7 @@ class RoleheaderController extends Controller
 
     public function search(){
 
-        $roleheader = Roleheader::latest()->search(request(['search']))->paginate(7);
+        $roleheader = Roleheader::latest()->search(request(['search']))->paginate(7)->withQueryString();
         return Inertia::render('Role/IndexRole', compact('roleheader'));
     }
 

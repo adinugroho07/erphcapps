@@ -2,7 +2,7 @@
   <app-layout title="Dashboard" pathImage="../image/logo.png">
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Paid Leave Create Page
+        Resign Show Page
       </h2>
     </template>
 
@@ -11,7 +11,7 @@
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
           <jet-form-section @submit.prevent="submitcuti()">
             <template #title>
-              Leave Information
+              Resign Information
             </template>
 
             <template #description>

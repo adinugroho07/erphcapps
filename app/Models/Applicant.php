@@ -61,8 +61,8 @@ class Applicant extends Model
                 ->orWhere('email', 'like' , '%'.$filters.'%')
                 ->orWhere('applicantcode', 'like' , '%'.$filters.'%')
                 ->orWhere('NIK', 'like' , '%'.$filters.'%')
-                ->orWhere('degree', 'like' , '%'.$filters.'%')
-                ->orWhere('status', 'like' , '%'.$filters.'%');
+                ->orWhere('degree', 'like' , '=' , $filters)
+                ->orWhere('status', '=' , $filters);
         });
 
     }

@@ -32,7 +32,7 @@ class AssignmentController extends Controller
 
     public function search()
     {
-        $assignment = Assignment::latest()->search(request(['search']))->paginate(7);
+        $assignment = Assignment::latest()->search(request(['search']))->paginate(7)->withQueryString();
 
         return Inertia::render('Assignment/ListAssignment', [
             'assignmentlist' => $assignment,

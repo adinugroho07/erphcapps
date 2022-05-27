@@ -38,9 +38,9 @@ class Mutasi extends Model
         //fungsi when adalah ketika hasil yang di dapat adalah true. jika true maka function akan di jalan kan.
         //jika false maka akan di skip function nya.
         $query->when($filters['search'] ?? false, function($query,$filters){
-            return $query->where('mutasicode', 'like' , '%'.$filters.'%')
-                ->orWhere('assignment_code', 'like' , '%'.$filters.'%')
-                ->orWhere('status', 'like' , '%'.$filters.'%')
+            return $query->where('mutasicode', '=' , $filters)
+                ->orWhere('assignment_code', '=' , $filters)
+                ->orWhere('status', '=' , $filters)
                 ->orWhere('username', 'like' , '%'.$filters.'%')
                 ->orWhere('created_by', 'like' , '%'.$filters.'%');
         });

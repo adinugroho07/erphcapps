@@ -23,7 +23,7 @@ class Assignment extends Model
         //fungsi when adalah ketika hasil yang di dapat adalah true. jika true maka function akan di jalan kan.
         //jika false maka akan di skip function nya.
         $query->when($filters['search'] ?? false, function($query,$filters){
-            return $query->where('assignment_code', 'like' , '%'.$filters.'%')
+            return $query->where('assignment_code', '=' , $filters)
                 ->orWhere('assignment_name', 'like' , '%'.$filters.'%')
                 ->orWhere('assignment_description', 'like' , '%'.$filters.'%');
         });

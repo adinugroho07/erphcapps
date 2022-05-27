@@ -211,6 +211,19 @@
                       <jet-input-error :message="form.errors.description" class="mt-2" />
                     </div>
 
+                    <!-- total hour -->
+                    <div class="col-span-6 sm:col-span-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <jet-label
+                        for="totalhour"
+                        value="Total Hours In This Period"
+                        class="font-semibold text-base"
+                      />
+                      <jet-input id="totalhour" type="text"  class="mt-2 block w-full" v-model="getTotalHour" disabled/>
+                    </div>
+
                     <div class="col-span-6 sm:col-span-6" >
                       <div class="block px-4 py-2 text-sm text-gray-400">
                         Timesheet Detail
@@ -526,7 +539,7 @@
 
             <!-- memo -->
             <div class="mt-2">
-              <jet-label for="memo" value="Memo Approval" class="text-lg"/>
+              <jet-label for="memo" value="Memo Approval" class="text-lg" :required="true"/>
               <textarea id="memo" class="mt-1 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="address" rows="3" cols="62" v-model="modalValue.memo" ></textarea>
             </div>
 
@@ -672,6 +685,13 @@ export default defineComponent({
         return this.assignmentnow.assignperson;
       }
     },
+    getTotalHour(){
+      let totalhour = 0;
+      this.timesheetdetail.forEach( (element) => {
+        totalhour = element.totalhours + totalhour;
+      });
+      return totalhour+' Hours';
+    }
   },
   methods:{
     openModal(){

@@ -11,11 +11,12 @@
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
           <jet-form-section >
             <template #title>
-              Profile Information
+              Assignment Information
             </template>
 
             <template #description>
-              Update your account's profile information and email address.
+              This Page Cotains Information About Workflow Route And Hierarchy Approval.
+              You Can Make Your Own Hierarchy Approval. Contact Your System Administrator To Assist You.
             </template>
 
 

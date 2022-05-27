@@ -41,7 +41,7 @@ class AbsenController extends Controller
 
     public function search()
     {
-        $absen = Absen::latest()->search(request(['search']))->paginate(7);
+        $absen = Absen::latest()->search(request(['search']))->paginate(7)->withQueryString();
 
         return Inertia::render('AbsenPage/AbsenList', [
             'absenlist' => $absen,
@@ -50,7 +50,7 @@ class AbsenController extends Controller
 
     public function searchWithActiveLogin()
     {
-        $absen = Absen::latest()->where('user_id', Auth::id())->search(request(['search']))->paginate(7);
+        $absen = Absen::latest()->where('user_id', Auth::id())->search(request(['search']))->paginate(7)->withQueryString();
 
         return Inertia::render('AbsenPage/AbsenList', [
             'absenlist' => $absen,
@@ -108,7 +108,7 @@ class AbsenController extends Controller
             'absenvalue' => $request->absenvalue
         ]);
 
-        return redirect()->back()->with('message', 'Absen Successfull');
+        return redirect()->back()->with('message', 'Submit Attendance Successfull');
     }
 
     /**

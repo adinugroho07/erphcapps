@@ -56,6 +56,7 @@
                         for="status"
                         value="Status Document"
                         class="font-semibold text-base"
+                        :required="true"
                       />
                       <jet-input id="status" type="text" class="mt-2 block w-full" v-model="form.status" disabled/>
                     </div>
@@ -69,6 +70,7 @@
                         for="applicantcode"
                         value="Applicant Code"
                         class="font-semibold text-base"
+                        :required="true"
                       />
                       <jet-input id="applicantcode" type="text" class="mt-2 block w-full" v-model="form.applicantcode" disabled/>
                     </div>
@@ -78,7 +80,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                       </svg>
-                      <jet-label for="assignment" value="Assignment" class="font-semibold text-base"/>
+                      <jet-label for="assignment" value="Assignment" class="font-semibold text-base" :required="true"/>
                       <select
                         id="assignment"
                         name="assignment"
@@ -107,6 +109,7 @@
                         for="assignperson"
                         value="Assignment For"
                         class="font-semibold text-base"
+                        :required="true"
                       />
                       <jet-input id="assignperson" type="text" class="mt-2 block w-full" v-model="compAssignperson" disabled/>
                     </div>
@@ -147,6 +150,7 @@
                         for="department"
                         value="Department"
                         class="font-semibold text-base"
+                        :required="true"
                       />
                       <select
                         id="department"
@@ -185,6 +189,7 @@
                         for="posname"
                         value="Position"
                         class="font-semibold text-base"
+                        :required="true"
                       />
                       <select
                         id="posname"
@@ -231,6 +236,7 @@
                         for="name"
                         value="Name"
                         class="font-semibold text-base"
+                        :required="true"
                       />
                       <jet-input id="name" :disabled="!form.isedit" type="text" class="mt-2 block w-full disabled:opacity-75" v-model="form.name" autocomplete="name" />
                       <jet-input-error :message="form.errors.name" class="mt-2" />
@@ -256,6 +262,7 @@
                         for="email"
                         value="Email"
                         class="font-semibold text-base"
+                        :required="true"
                       />
                       <jet-input id="email" :disabled="!form.isedit" type="email" class="mt-2 block w-full" v-model="form.email" />
                       <jet-input-error :message="form.errors.email" class="mt-2" />
@@ -266,7 +273,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                       </svg>
-                      <jet-label for="gender" value="Gender" class="font-semibold text-base"/>
+                      <jet-label for="gender" value="Gender" class="font-semibold text-base" :required="true"/>
                       <select
                         id="gender"
                         name="gender"
@@ -291,7 +298,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      <jet-label for="birthdate" value="Birthdate" class="font-semibold text-base"/>
+                      <jet-label for="birthdate" value="Birthdate" class="font-semibold text-base" :required="true"/>
                       <div class="mt-2 flex items-center justify-center">
                         <div class="datepicker relative form-floating xl:w-96" >
                           <input type="date"
@@ -314,9 +321,9 @@
                         for="placeborn"
                         value="Place Born"
                         class="font-semibold text-base"
-                        :disabled="!form.isedit"
+                        :required="true"
                       />
-                      <jet-input id="placeborn" type="email" class="mt-2 block w-full" v-model="form.placeborn" />
+                      <jet-input id="placeborn" type="email" class="mt-2 block w-full" v-model="form.placeborn" :disabled="!form.isedit"/>
                       <jet-input-error :message="form.errors.placeborn" class="mt-2" />
                     </div>
 
@@ -325,7 +332,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                       </svg>
-                      <jet-label for="NIK" value="NIK" class="font-semibold text-base"/>
+                      <jet-label for="NIK" value="NIK" class="font-semibold text-base" :required="true"/>
                       <jet-input
                         id="NIK"
                         type="text"
@@ -341,7 +348,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                       </svg>
-                      <jet-label for="NPWP" value="NPWP" class="font-semibold text-base"/>
+                      <jet-label for="NPWP" value="NPWP" class="font-semibold text-base" :required="true"/>
                       <jet-input
                         id="NPWP"
                         type="text"
@@ -357,7 +364,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                       </svg>
-                      <jet-label for="religion" value="Religion" class="font-semibold text-base"/>
+                      <jet-label for="religion" value="Religion" class="font-semibold text-base" :required="true"/>
                       <select
                         id="religion"
                         name="religion"
@@ -382,7 +389,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
                       </svg>
-                      <jet-label for="married" value="Married" class="font-semibold text-base"/>
+                      <jet-label for="married" value="Married" class="font-semibold text-base" :required="true"/>
                       <select
                         id="married"
                         name="married"
@@ -407,7 +414,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                       </svg>
-                      <jet-label for="bloodtype" value="Blood Type" class="font-semibold text-base"/>
+                      <jet-label for="bloodtype" value="Blood Type" class="font-semibold text-base" :required="true"/>
                       <select
                         id="bloodtype"
                         name="bloodtype"
@@ -432,7 +439,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                       </svg>
-                      <jet-label for="phonenumber" value="Nomor Handphone" class="font-semibold text-base"/>
+                      <jet-label for="phonenumber" value="Nomor Handphone" class="font-semibold text-base" :required="true"/>
                       <jet-input
                         id="phonenumber"
                         type="text"
@@ -448,7 +455,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                       </svg>
-                      <jet-label for="degree" value="Degree" class="font-semibold text-base"/>
+                      <jet-label for="degree" value="Degree" class="font-semibold text-base" :required="true"/>
                       <select
                         id="degree"
                         name="degree"
@@ -481,7 +488,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      <jet-label for="districts" value="Districts" class="font-semibold text-base"/>
+                      <jet-label for="districts" value="Districts" class="font-semibold text-base" :required="true"/>
                       <jet-input
                         id="districts"
                         type="text"
@@ -497,7 +504,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      <jet-label for="city" value="City" class="font-semibold text-base"/>
+                      <jet-label for="city" value="City" class="font-semibold text-base" :required="true"/>
                       <jet-input
                         id="city"
                         type="text"
@@ -513,7 +520,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                       </svg>
-                      <jet-label for="address" value="Address" class="font-semibold text-base"/>
+                      <jet-label for="address" value="Address" class="font-semibold text-base" :required="true"/>
                       <textarea id="address" :disabled="!form.isedit" class="mt-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="address" rows="3" cols="77" v-model="form.address" ></textarea>
                       <jet-input-error :message="form.errors.address" class="mt-2" />
                     </div>
@@ -523,7 +530,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
                       </svg>
-                      <jet-label for="postalcode" value="Kode Pos" class="font-semibold text-base"/>
+                      <jet-label for="postalcode" value="Kode Pos" class="font-semibold text-base" :required="true"/>
                       <jet-input
                         id="postalcode"
                         type="text"
@@ -539,7 +546,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
                       </svg>
-                      <jet-label for="citizenship" value="Citizenship" class="font-semibold text-base"/>
+                      <jet-label for="citizenship" value="Citizenship" class="font-semibold text-base" :required="true"/>
                       <jet-input
                         id="citizenship"
                         type="text"
@@ -560,7 +567,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                       </svg>
-                      <jet-label for="degree" value="Last Degree" class="font-semibold text-base"/>
+                      <jet-label for="degree" value="Last Degree" class="font-semibold text-base" :required="true"/>
                       <select
                         id="lastdegree"
                         name="lastdegree"
@@ -585,7 +592,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                       </svg>
-                      <jet-label for="major" value="Major" class="font-semibold text-base"/>
+                      <jet-label for="major" value="Major" class="font-semibold text-base" :required="true"/>
                       <jet-input
                         id="major"
                         type="text"
@@ -601,7 +608,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                       </svg>
-                      <jet-label for="studyprogram" value="Program Study" class="font-semibold text-base"/>
+                      <jet-label for="studyprogram" value="Program Study" class="font-semibold text-base" :required="true"/>
                       <jet-input
                         id="studyprogram"
                         type="text"
@@ -617,7 +624,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      <jet-label for="startschool" value="Start School" class="font-semibold text-base"/>
+                      <jet-label for="startschool" value="Start School" class="font-semibold text-base" :required="true"/>
                       <div class="mt-2 flex items-center justify-center">
                         <div class="datepicker relative form-floating xl:w-96" >
                           <input type="date"
@@ -636,7 +643,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      <jet-label for="endschool" value="End School" class="font-semibold text-base"/>
+                      <jet-label for="endschool" value="End School" class="font-semibold text-base" :required="true"/>
                       <div class="mt-2 flex items-center justify-center">
                         <div class="datepicker relative form-floating xl:w-96" >
                           <input type="date"
@@ -779,6 +786,7 @@
                         for="ijazah"
                         value="Ijazah"
                         class="font-semibold text-base"
+                        :required="true"
                       />
                       <input
                         class="mt-2 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
@@ -814,6 +822,7 @@
                         for="cv"
                         value="Curiculum Vitae"
                         class="font-semibold text-base"
+                        :required="true"
                       />
                       <input class="mt-2 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                              id="cv"

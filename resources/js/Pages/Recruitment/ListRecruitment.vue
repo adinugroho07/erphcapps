@@ -2,7 +2,7 @@
   <app-layout title="Dashboard">
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Applicant List
+        Recruitment List
 
       </h2>
     </template>
@@ -12,7 +12,7 @@
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
           <div class="float-right">
             <Link href="applicant/create">
-              <jet-button class="bg-emerald-500">Create Applicant</jet-button>
+              <jet-button class="bg-emerald-500">Create Applicant Recruitment</jet-button>
             </Link>
           </div>
           <div class="flex">

@@ -31,11 +31,12 @@
               <div class="md:col-span-1 flex justify-between ">
                 <div class=" sm:px-0">
                   <h3 class="text-lg font-medium text-gray-900">
-                    Document And Work Flow Information
+                    Profile Information
                   </h3>
                   <div class="border-t border-gray-300"></div>
                   <p class="mt-1 text-sm text-gray-600">
-                    create employee accounts from recruitment data where the recruitment data has been approved by manager-level officials
+                    This Is Profile Page That Contains All Employee Information Data.
+                    Be Carefull To Update Employee Data. Contact Your System Administrator To Assist You.
                   </p>
                 </div>
               </div>
@@ -72,6 +73,7 @@
                         for="named1"
                         value="Name"
                         class="font-semibold text-base"
+                        :required="true"
                       />
                       <jet-input id="name" type="text" class="mt-2 block w-full disabled:opacity-75" v-model="form.name" autocomplete="name"  />
                       <jet-input-error :message="form.errors.name" class="mt-2" />
@@ -97,6 +99,7 @@
                         for="emaild1"
                         value="Email"
                         class="font-semibold text-base"
+                        :required="true"
                       />
                       <jet-input id="email" type="email" class="mt-2 block w-full" v-model="form.email" />
                       <jet-input-error :message="form.errors.email" class="mt-2" />
@@ -107,7 +110,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
                       </svg>
-                      <jet-label for="password" value="Password" />
+                      <jet-label for="password" class="font-semibold text-base" value="Password" :required="true"/>
                       <jet-input
                         id="password"
                         v-model="form.password"
@@ -126,7 +129,9 @@
                       </svg>
                       <jet-label
                         for="password_confirmation"
+                        class="font-semibold text-base"
                         value="Confirm Password"
+                        :required="true"
                       />
                       <jet-input
                         id="password_confirmation"
@@ -149,6 +154,7 @@
                         for="status"
                         value="Status Account"
                         class="font-semibold text-base"
+                        :required="true"
                       />
                       <select id="status" name="status" v-model="form.status" class="mt-2 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                         <option v-for="option in options" disabled :selected="form.status === option.value" :key="option.value" :value="option.value">{{option.text}}</option>
@@ -165,6 +171,7 @@
                         for="position_category"
                         value="Position Category"
                         class="font-semibold text-base"
+                        :required="true"
                       />
                       <select id="position_category" name="position_category" v-model="form.position_category" class="mt-2 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                         <option v-for="option in optionposcat" :selected="form.position_category === option.value" :key="option.value" :value="option.value">{{option.text}}</option>
@@ -203,6 +210,7 @@
                         for="named1"
                         value="Name"
                         class="font-semibold text-base"
+                        :required="true"
                       />
                       <jet-input id="name" type="text" class="mt-2 block w-full disabled:opacity-75" v-model="form.name" autocomplete="name" disabled />
                       <jet-input-error :message="form.errors.name" class="mt-2" />
@@ -228,6 +236,7 @@
                         for="emaild1"
                         value="Email"
                         class="font-semibold text-base"
+                        :required="true"
                       />
                       <jet-input id="email" type="email" class="mt-2 block w-full" v-model="form.email" disabled/>
                       <jet-input-error :message="form.errors.email" class="mt-2" />
@@ -238,7 +247,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                       </svg>
-                      <jet-label for="nik" value="Nik" class="font-semibold text-base"/>
+                      <jet-label for="nik" value="Nik" class="font-semibold text-base" :required="true"/>
                       <jet-input id="nik" type="text" class="mt-2 block w-full" v-model="form.nik" />
                       <jet-input-error :message="form.errors.nik" class="mt-2" />
                     </div>
@@ -263,6 +272,7 @@
                         for="department"
                         value="Department"
                         class="font-semibold text-base"
+                        :required="true"
                       />
                       <select
                         id="department"
@@ -300,6 +310,7 @@
                         for="posname"
                         value="Position"
                         class="font-semibold text-base"
+                        :required="true"
                       />
                       <select
                         id="posname"
@@ -456,7 +467,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
                       </svg>
-                      <jet-label for="posstatus" value="Employee Status" class="font-semibold text-base"/>
+                      <jet-label for="posstatus" value="Employee Status" class="font-semibold text-base" :required="true"/>
                       <select
                         id="posstatus"
                         name="posstatus"
@@ -657,7 +668,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
                       </svg>
-                      <jet-label for="married" value="Married" class="font-semibold text-base"/>
+                      <jet-label for="married" value="Married" class="font-semibold text-base" :required="true"/>
                       <select
                         id="married"
                         name="married"

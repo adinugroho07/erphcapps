@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Wfassignment extends Model
+class  Wfassignment extends Model
 {
     use HasFactory;
 
@@ -33,11 +33,11 @@ class Wfassignment extends Model
         //fungsi when adalah ketika hasil yang di dapat adalah true. jika true maka function akan di jalan kan.
         //jika false maka akan di skip function nya.
         $query->when($filters['search'] ?? false, function($query,$filters){
-            return $query->where('assignment_code', 'like' , '%'.$filters.'%')
-                ->orWhere('sequence', 'like' , '%'.$filters.'%')
-                ->orWhere('assignstatus', 'like' , '%'.$filters.'%')
-                ->orWhere('modulename', 'like' , '%'.$filters.'%')
-                ->orWhere('codetransaction', 'like' , '%'.$filters.'%')
+            return $query->where('assignment_code', '=' , $filters)
+                ->orWhere('sequence', '=' , $filters)
+                ->orWhere('assignstatus', '=' , $filters)
+                ->orWhere('modulename', '=' , $filters)
+                ->orWhere('codetransaction', '=' , $filters)
                 ->orWhere('assignperson', 'like' , '%'.$filters.'%');
         });
 

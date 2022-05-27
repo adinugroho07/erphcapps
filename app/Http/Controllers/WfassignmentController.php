@@ -32,7 +32,7 @@ class WfassignmentController extends Controller
 
     public function search()
     {
-        $wfassignment = Wfassignment::latest()->where('assignstatus','ACTIVE')->search(request(['search']))->paginate(7);
+        $wfassignment = Wfassignment::latest()->where('assignstatus','ACTIVE')->search(request(['search']))->paginate(7)->withQueryString();
         $userManagerUp = User::where('status','active')->whereIn('position_category', array('VP','MGR','GM','RECRUITER'))->get();
         return Inertia::render('Assignment/ActiveAssignment', [
             'wfassignment' => $wfassignment,

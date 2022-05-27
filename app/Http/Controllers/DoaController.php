@@ -43,7 +43,7 @@ class DoaController extends Controller
 
     public function search()
     {
-        $doa = Doa::latest()->search(request(['search']))->paginate(7);
+        $doa = Doa::latest()->search(request(['search']))->paginate(7)->withQueryString();
 
         return Inertia::render('DOA/ListDoa', [
             'doa' => $doa,

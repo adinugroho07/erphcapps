@@ -1,6 +1,7 @@
 <template>
     <label class="block font-medium text-sm text-gray-700">
-        <span v-if="value">{{ value }}</span>
+        <span v-if="value && required">{{ value }} <i class="text-xs text-red-600">*Required</i></span>
+        <span v-else-if="value">{{ value }}</span>
         <span v-else><slot></slot></span>
     </label>
 </template>
@@ -9,6 +10,6 @@
     import { defineComponent } from 'vue'
 
     export default defineComponent({
-        props: ['value']
+        props: ['value','required']
     })
 </script>

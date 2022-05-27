@@ -11,7 +11,7 @@
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
           <jet-form-section @submit.prevent="submitresign()">
             <template #title>
-              Resign Information
+              Transfer Job Information
             </template>
 
             <template #description>
@@ -28,6 +28,7 @@
                   for="status"
                   value="Status Document"
                   class="font-semibold text-base"
+                  :required="true"
                 />
                 <jet-input id="status" type="text" class="mt-2 block w-full" v-model="form.status" disabled/>
               </div>
@@ -41,6 +42,7 @@
                   for="codemutasi"
                   value="Transfer Job Code"
                   class="font-semibold text-base"
+                  :required="true"
                 />
                 <jet-input id="codemutasi" type="text" class="mt-2 block w-full" v-model="form.mutasicode" disabled/>
               </div>
@@ -50,7 +52,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                 </svg>
-                <jet-label for="assignment" value="Assignment" class="font-semibold text-base"/>
+                <jet-label for="assignment" value="Assignment" class="font-semibold text-base" :required="true"/>
                 <select
                   id="assignment"
                   name="assignment"
@@ -79,7 +81,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
                 </svg>
-                <jet-label for="description" value="Description" class="font-semibold text-base"/>
+                <jet-label for="description" value="Description" class="font-semibold text-base" :required="true"/>
                 <textarea
                   id="description"
                   class="mt-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
@@ -111,6 +113,7 @@
                   for="created_by"
                   value="Created By"
                   class="font-semibold text-base"
+                  :required="true"
                 />
                 <jet-input id="created_by" type="text" class="mt-1 block w-full" v-model="form.created_by" disabled/>
                 <jet-input-error :message="form.errors.created_by" class="mt-2" />
@@ -142,7 +145,7 @@
                 </svg>
                 <Listbox v-model="selectedfrom" as="div" :disabled="!form.isedit">
                   <ListboxLabel class="block font-semibold text-base">
-                    User To Be Transfered
+                     <span>User To Be Transfered <i class="text-xs text-red-600">*Required</i></span>
                   </ListboxLabel>
                   <div class="mt-1 relative">
                     <ListboxButton
@@ -246,6 +249,7 @@
                   for="department"
                   value="Original Department"
                   class="font-semibold text-base"
+                  :required="true"
                 />
                 <jet-input id="oridepartment" type="text" class="mt-1 block w-full" v-model="form.department" disabled/>
                 <jet-input-error :message="form.errors.department" class="mt-2" />
@@ -272,6 +276,7 @@
                   for="posname"
                   value="Original Position"
                   class="font-semibold text-base"
+                  :required="true"
                 />
                 <jet-input id="oriposition" type="text" class="mt-1 block w-full" v-model="form.posname" disabled/>
                 <jet-input-error :message="form.errors.posname" class="mt-2" />
@@ -306,6 +311,7 @@
                   for="department"
                   value="Department"
                   class="font-semibold text-base"
+                  :required="true"
                 />
                 <select
                   id="department"
@@ -344,6 +350,7 @@
                   for="posname"
                   value="Position"
                   class="font-semibold text-base"
+                  :required="true"
                 />
                 <select
                   id="posname"

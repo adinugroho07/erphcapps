@@ -2,7 +2,7 @@
   <app-layout title="Dashboard" pathImage="../../../../image/logo.png">
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Recruitment Dashboard
+        Recruitment Form Create Account Page
       </h2>
     </template>
 
@@ -31,7 +31,7 @@
               <div class="md:col-span-1 flex justify-between">
                 <div class=" sm:px-0">
                   <h3 class="text-lg font-medium text-gray-900">
-                    Document And Work Flow Information
+                    Profile Information
                   </h3>
                   <div class="border-t border-gray-300"></div>
                   <p class="mt-1 text-sm text-gray-600">

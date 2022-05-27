@@ -13,7 +13,8 @@
             <template #title> Profile Information </template>
 
             <template #description>
-              Update your account's profile information and email address.
+              This Is Profile Page That Contains All Employee Information Data.
+              Be Carefull To Update Employee Data. Contact Your System Administrator To Assist You.
             </template>
 
             <!--detail -->

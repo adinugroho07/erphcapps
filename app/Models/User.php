@@ -100,10 +100,10 @@ class User extends Authenticatable
             return $query->where('name', 'like' , '%'.$filters.'%')
                 ->orWhere('email', 'like' , '%'.$filters.'%')
                 ->orWhere('department', 'like' , '%'.$filters.'%')
-                ->orWhere('posname', 'like' , '%'.$filters.'%')
+                ->orWhere('posname', '=' , $filters)
                 ->orWhere('nik', 'like' , '%'.$filters.'%')
-                ->orWhere('status', 'like' , '%'.$filters.'%')
-                ->orWhere('posstatus', 'like' , '%'.$filters.'%');
+                ->orWhere('status', '=' , $filters)
+                ->orWhere('posstatus', '=' , $filters);
         });
 
     }

@@ -11,18 +11,19 @@
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
           <jet-form-section @submit.prevent="submit()">
             <template #title>
-              Profile Information
+              Assignment Information
             </template>
 
             <template #description>
-              Update your account's profile information and email address.
+              This Page Cotains Information About Workflow Route And Hierarchy Approval.
+              You Can Make Your Own Hierarchy Approval. Contact Your System Administrator To Assist You.
             </template>
 
 
             <template #form>
               <!-- assignment_code -->
               <div class="col-span-6 sm:col-span-4">
-                <jet-label for="assignment_code" value="Assignment Code" />
+                <jet-label for="assignment_code" value="Assignment Code" :required="true"/>
                 <jet-input id="assignment_code" type="text" class="mt-1 block w-full" v-model="form.assignment_code" disabled=""/>
                 <jet-input-error :message="form.errors.assignment_code" class="mt-2" />
               </div>
@@ -30,7 +31,7 @@
 
               <!-- assignment_name -->
               <div class="col-span-6 sm:col-span-4">
-                <jet-label for="assignment_name" value="Assignment Name" />
+                <jet-label for="assignment_name" value="Assignment Name" :required="true"/>
                 <jet-input id="assignment_name" type="text" class="mt-1 block w-full" v-model="form.assignment_name" autocomplete="name" />
                 <jet-input-error :message="form.errors.assignment_name" class="mt-2" />
               </div>
@@ -38,7 +39,7 @@
 
               <!-- assignment_description -->
               <div class="col-span-6 sm:col-span-4">
-                <jet-label for="assignment_description" value="Assignment Description" />
+                <jet-label for="assignment_description" value="Assignment Description" :required="true"/>
                 <textarea id="activiy" placeholder="meeting with someone" rows="6" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" v-model="form.assignment_description"></textarea>
                 <jet-input-error :message="form.errors.assignment_description" class="mt-2" />
               </div>
@@ -127,7 +128,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
               </svg>
-              <jet-label for="assignment_description" value="Assignment Description" class="text-lg"/>
+              <jet-label for="assignment_description" value="Assignment Description" class="text-lg" :required="true"/>
               <textarea id="assignment_description" v-model="formassignmentdetailobjt.assignment_description" class="mt-1 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="assignment_description" rows="3" cols="62"  ></textarea>
             </div>
             <!-- assignment_description -->
@@ -137,7 +138,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
-              <jet-label for="sequence" value="Sequence Approval" class="text-lg"/>
+              <jet-label for="sequence" value="Sequence Approval" class="text-lg" :required="true"/>
               <jet-input id="sequence" type="number" class="mt-1 block w-full" v-model="formassignmentdetailobjt.sequence"/>
             </div>
             <!-- sequence -->
@@ -147,7 +148,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
               </svg>
-              <jet-label for="status" value="Status" class="text-lg"/>
+              <jet-label for="status" value="Status" class="text-lg" :required="true"/>
               <jet-input id="status" type="text" class="mt-1 block w-full" v-model="formassignmentdetailobjt.status" />
             </div>
             <!-- status -->
@@ -159,7 +160,7 @@
               </svg>
               <Listbox v-model="selectedassignmetoid" as="div">
                 <ListboxLabel class="block text-lg">
-                  Assignmen Person
+                  <span>Assignmen Person <i class="text-xs text-red-600">*Required</i></span>
                 </ListboxLabel>
                 <div class="mt-1 relative">
                   <ListboxButton

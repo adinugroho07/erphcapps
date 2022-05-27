@@ -11,7 +11,7 @@
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
           <jet-form-section @submit.prevent="submitresign()">
             <template #title>
-              Resign Information
+              Transfer Job Information
             </template>
 
             <template #description>

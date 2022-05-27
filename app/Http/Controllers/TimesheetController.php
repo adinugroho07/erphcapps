@@ -42,7 +42,7 @@ class TimesheetController extends Controller
 
     public function search()
     {
-        $timesheet = Timesheet::latest()->search(request(['search']))->paginate(7);
+        $timesheet = Timesheet::latest()->search(request(['search']))->paginate(7)->withQueryString();
 
         return Inertia::render('Timesheet/ListAllTimeSheet', [
             'timesheet' => $timesheet,
@@ -51,7 +51,7 @@ class TimesheetController extends Controller
 
     public function searchWithActiveLogin()
     {
-        $timesheet = Timesheet::latest()->where('createdbyid', Auth::id())->search(request(['search']))->paginate(7);
+        $timesheet = Timesheet::latest()->where('createdbyid', Auth::id())->search(request(['search']))->paginate(7)->withQueryString();
 
         return Inertia::render('Timesheet/ListPersonalTimeSheet', [
             'timesheet' => $timesheet,
@@ -401,11 +401,13 @@ class TimesheetController extends Controller
         $timesheetdetail = Timesheetdetail::where('timesheet_id',$timesheet->id)->get();
         $timesheethistory = Timesheethistory::where('ownertrxid',$timesheet->id)->get();
         $assignment = Assignment::where('isactive',1)->get();
+        $assignmentnow = Wfassignment::where('assignstatus', 'ACTIVE')->where('ownertrxid',$timesheet->id)->first();
         return Inertia::render('Timesheet/ShowTimeSheet',[
            'timesheet' => $timesheet,
             'timesheetdetail' =>$timesheetdetail,
             'timesheethistory' => $timesheethistory,
-            'assignment' => $assignment
+            'assignment' => $assignment,
+            'assignmentnow' => $assignmentnow
         ]);
     }
 

@@ -42,8 +42,8 @@ class Cuti extends Model
             return $query->where('cuticode', 'like' , '%'.$filters.'%')
                 ->orWhere('assignment_code', 'like' , '%'.$filters.'%')
                 ->orWhere('description', 'like' , '%'.$filters.'%')
-                ->orWhere('status', 'like' , '%'.$filters.'%')
-                ->orWhere('typecuti', 'like' , '%'.$filters.'%')
+                ->orWhere('status', '=' , $filters)
+                ->orWhere('typecuti', '=' , $filters)
                 ->orWhere('created_by', 'like' , '%'.$filters.'%');
         });
 

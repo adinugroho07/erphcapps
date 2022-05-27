@@ -11,7 +11,7 @@
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
           <div class="float-right">
             <Link href="users/create">
-              <jet-button class="bg-emerald-500">Create User</jet-button>
+              <jet-button class="bg-emerald-500">Create User Account</jet-button>
             </Link>
           </div>
           <div class="flex">
@@ -61,7 +61,7 @@
                   scope="col"
                   class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Status Pekerja
+                  Worker Pekerja
                 </th>
                 <th scope="col" class="relative px-6 py-3">
                   <span class="sr-only">Edit</span>
@@ -184,7 +184,7 @@ export default defineComponent({
   setup(props) {
 
     const usersForm = ref(props.users);
-    //console.log(props.users);
+    //console.log(props.users.links);
 
     const form = useForm({
         id: ''
@@ -210,10 +210,10 @@ export default defineComponent({
     }
 
     const searching = () => {
-      searchValue.post(route('searchusers'), {
+      searchValue.get(route('searchusers'), {
         preserveScroll: true,
         onSuccess: () => {
-          form.reset('search');
+          searchValue.reset('search');
         }
       });
     }

@@ -43,6 +43,7 @@
                         for="status"
                         value="Status Document"
                         class="font-semibold text-base"
+                        :required="true"
                       />
                       <jet-input id="status" type="text" class="mt-2 block w-full" v-model="form.status" disabled/>
                     </div>
@@ -56,6 +57,7 @@
                         for="timesheetcode"
                         value="Timesheet Code"
                         class="font-semibold text-base"
+                        :required="true"
                       />
                       <jet-input id="timesheetcode" type="text" class="mt-2 block w-full" v-model="form.timesheetcode" disabled/>
                     </div>
@@ -65,7 +67,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                       </svg>
-                      <jet-label for="assignment" value="Assignment" class="font-semibold text-base"/>
+                      <jet-label for="assignment" value="Assignment" class="font-semibold text-base" :required="true"/>
                       <select
                         id="assignment"
                         name="assignment"
@@ -121,6 +123,7 @@
                         for="name"
                         value="Name"
                         class="font-semibold text-base"
+                        :required="true"
                       />
                       <jet-input id="name" type="text" :disabled="form.isedit" class="mt-2 block w-full disabled:opacity-75" v-model="form.name" autocomplete="name" />
                       <jet-input-error :message="form.errors.name" class="mt-2" />
@@ -146,6 +149,7 @@
                         for="email"
                         value="Email"
                         class="font-semibold text-base"
+                        :required="true"
                       />
                       <jet-input id="email" type="email" :disabled="form.isedit" class="mt-2 block w-full" v-model="form.email" />
                       <jet-input-error :message="form.errors.email" class="mt-2" />
@@ -156,7 +160,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                       </svg>
-                      <jet-label for="periode" value="Period" class="font-semibold text-base"/>
+                      <jet-label for="periode" value="Period" class="font-semibold text-base" :required="true"/>
                       <select
                         id="periode"
                         name="periode"
@@ -181,7 +185,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                       </svg>
-                      <jet-label for="description" value="Descriptions" class="font-semibold text-base"/>
+                      <jet-label for="description" value="Descriptions" class="font-semibold text-base" :required="true"/>
                       <textarea id="description" :disabled="form.isedit" v-model="form.description"  class="mt-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" name="address" rows="3" cols="77" ></textarea>
                       <jet-input-error :message="form.errors.description" class="mt-2" />
                     </div>
@@ -199,10 +203,10 @@
                         <table class="min-w-full divide-y divide-gray-200 ">
                           <thead class="bg-gray-50">
                           <tr>
-                            <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Work Status</th>
-                            <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                            <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Hours</th>
-                            <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Present</th>
+                            <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"><span>Work Status<i class="text-xs text-red-600">*</i></span></th>
+                            <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"><span>Date<i class="text-xs text-red-600">*</i></span></th>
+                            <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"><span>Total Hours<i class="text-xs text-red-600">*</i></span></th>
+                            <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"><span>Present<i class="text-xs text-red-600">*</i></span></th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Work Location</th>
                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Remarks</th>
                           </tr>
