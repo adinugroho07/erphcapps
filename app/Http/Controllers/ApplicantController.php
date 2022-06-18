@@ -188,12 +188,18 @@ class ApplicantController extends Controller
             $notifMessage = 'Document Rejected Successfully';
         };
 
-        $assignmentnow = Wfassignment::where('assignstatus', 'ACTIVE')->where('ownertrxid',$request->id)->first();
+        $assignmentnowobj = Wfassignment::where('assignstatus', 'ACTIVE')->where('ownertrxid',$request->id)->first();
+        $assignmentnow = '';
+        if($assignmentnowobj == null){
+            $assignmentnow = 'There Is No Approval';
+        } else {
+            $assignmentnow = $assignmentnowobj->assignperson;
+        }
 
         return redirect()->back()->with('message',[
             'status' => $statusToBeBack,
             'message' => $notifMessage,
-            'assignment' => $assignmentnow->assignperson
+            'assignment' => $assignmentnow
         ]);
     }
 
@@ -403,7 +409,8 @@ class ApplicantController extends Controller
             'backtoback' => $request->backtoback ,
             'backtoback_id' => $request->backtoback_id ,
             'postalcode' => $request->postalcode ,
-            'bank' => $request->bank
+            'bank' => $request->bank,
+            'totalhours' => 0
         ];
 
         //dd($data);

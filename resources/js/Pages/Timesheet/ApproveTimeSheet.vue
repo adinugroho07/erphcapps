@@ -626,6 +626,7 @@ export default defineComponent({
         attachment4 : this.timesheet.attachment4,
       }),
       timesheetdetails:[],
+      assignmentAfterAction: '',
       selectedperiod: '',
       optionsPeriod: [
         { text: "January - "+DateTime.local().year, value: 1 },
@@ -678,11 +679,15 @@ export default defineComponent({
       return false;
     },
     compAssignperson(){
-      console.log(this.assignmentnow);
+      //console.log(this.assignmentnow);
       if (this.assignmentnow === null){
         return 'There Is No Approval';
       } else {
-        return this.assignmentnow.assignperson;
+        if (this.assignmentAfterAction === ''){
+          return this.assignmentnow.assignperson;
+        } else {
+          return this.assignmentAfterAction;
+        }
       }
     },
     getTotalHour(){
@@ -718,7 +723,9 @@ export default defineComponent({
       this.modalValue.action = 'REJECT';
       this.modalValue.post(route('timesheet.approve'), {
         onSuccess: () => {
-          this.notif('Success',this.$page.props.flash.message,'success');
+          this.notif('Success',this.$page.props.flash.message.message,'success');
+          this.form.status = this.$page.props.flash.message.status;
+          this.assignmentAfterAction = this.$page.props.flash.message.assignment;
           this.modalValue.reset('memo');
           this.modalValue.reset('action');
           this.close();
@@ -733,7 +740,9 @@ export default defineComponent({
       this.modalValue.post(route('timesheet.approve'), {
         onSuccess: () => {
           console.log(this.$page.props);
-          this.notif('Success',this.$page.props.flash.message,'success');
+          this.notif('Success',this.$page.props.flash.message.message,'success');
+          this.form.status = this.$page.props.flash.message.status;
+          this.assignmentAfterAction = this.$page.props.flash.message.assignment;
           this.modalValue.reset('memo');
           this.modalValue.reset('action');
           this.close();

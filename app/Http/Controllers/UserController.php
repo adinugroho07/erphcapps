@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\Fortify\PasswordValidationRules;
 use App\Models\Organization;
 use App\Models\Role;
+use App\Models\Timesheet;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -129,7 +130,8 @@ class UserController extends Controller
             'backtoback' => $request->backtoback ,
             'backtoback_id' => $request->backtoback_id ,
             'postalcode' => $request->postalcode ,
-            'bank' => $request->bank
+            'bank' => $request->bank,
+            'totalhours' => 0
         ];
 
         User::create($data);
@@ -145,11 +147,17 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $timesheet = Timesheet::select('timesheet.timesheetcode','timesheet.status')
+            ->selectRaw('sum(timesheet_detail.totalhours) AS totalhours')
+            ->join('timesheet_detail','timesheet_detail.timesheet_id','=','timesheet.id')
+            ->where('createdbyid',$user->id)
+            ->groupBy('timesheet.timesheetcode','timesheet.status')->get();
         $role = Role::where('user_id',$user->id)->get();
         return Inertia::render('User/Show', [
             'userdetail' => $user,
             'roles' => $role,
-            'darimana' => 'admin'
+            'darimana' => 'admin',
+            'timesheet' => $timesheet
         ]);
     }
 

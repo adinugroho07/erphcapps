@@ -58,6 +58,7 @@ class User extends Authenticatable
         'backtoback_id',
         'postalcode',
         'bank',
+        'totalhours',
     ];
 
     /**

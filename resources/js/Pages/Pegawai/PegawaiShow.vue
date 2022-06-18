@@ -29,6 +29,13 @@
                   <svg class="mr-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path></svg>Roles
                 </a>
               </li>
+              <li class="mr-2">
+                <a href="#" @click.prevent="toggle('timesheet')" :class="isActiveTimesheet">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>Timesheet
+                </a>
+              </li>
             </ul>
           </div>
           <jet-form-section >
@@ -111,6 +118,19 @@
                   class="font-semibold text-base"
                 />
                 <jet-input id="email" type="email" class="mt-2 block w-full" v-model="form.email" disabled/>
+              </div>
+
+              <!-- totalhours -->
+              <div class="col-span-6 sm:col-span-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <jet-label
+                  for="totalhours"
+                  value="Total Hours"
+                  class="font-semibold text-base"
+                />
+                <jet-input id="email" type="text" class="mt-2 block w-full" v-model="form.totalhours" disabled/>
               </div>
 
               <!-- Posname -->
@@ -507,6 +527,87 @@
             </template>
             <!--role-->
 
+            <!--Timesheet-->
+            <template v-if="timesheettgl" #form>
+              <!-- Name -->
+              <div class="col-span-6 sm:col-span-6">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <jet-label for="named1" value="Name" class="font-semibold text-base" />
+                <jet-input id="namer" type="text" class="mt-2 block w-full disabled:opacity-75" v-model="form.name" autocomplete="name" disabled />
+              </div>
+
+
+              <!-- Timesheet table-->
+              <div class="col-span-6 sm:col-span-6" >
+                <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-6 float-left h-6 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                <jet-label for="namer" value="User Timesheet" class="mb-2 font-semibold text-base"/>
+                <div class="flex flex-row gap-4">
+                  <div class="shadow overflow-auto border-b border-gray-200 sm:rounded-lg" >
+                    <table class="min-w-full divide-y  divide-gray-200">
+                      <thead class="bg-gray-50">
+                      <tr>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" >
+                          No
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Timesheet Code
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Status
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Total Hours
+                        </th>
+                      </tr>
+                      </thead>
+                      <tbody class="bg-white divide-y divide-gray-200">
+                      <tr v-for="(tms, index) in timesheet" :key="tms.timesheetcode">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          <div class="text-sm text-gray-900">
+                            {{ index+1 }}
+                          </div>
+                        </td>
+
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" >
+                          {{ tms.timesheetcode }}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" >
+                          {{ tms.status }}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" >
+                          {{ tms.status === 'REJECTED' ? 0:tms.totalhours }}
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <td colspan="3" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center font-bold">Total Hours</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-bold">{{getTotalHours}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+
+            </template>
+            <!--Timesheet-->
+
             <template #actions>
               <Link :href="linkback" class="float-left">
                 <jet-button class="bg-cyan-500 hover:bg-cyan-600" >Back</jet-button>
@@ -543,7 +644,7 @@ export default defineComponent({
     JetSecondaryButton,
     Link
   },
-  props:['userdetail','roles','darimana'],
+  props:['userdetail','roles','darimana','timesheet'],
   data(){
     return{
       form: this.$inertia.form({
@@ -580,6 +681,7 @@ export default defineComponent({
         bankkey: this.userdetail.bankkey,
         backtoback_id: this.userdetail.backtoback_id,
         backtoback: this.userdetail.backtoback,
+        totalhours: this.userdetail.totalhours,
       }),
       options:[
         { text: 'Active', value: 'active' },
@@ -587,12 +689,24 @@ export default defineComponent({
       ],
       basic: true,
       detail:false,
+      timesheettgl:false,
       role:false,
       active: 'inline-flex py-4 px-4 text-sm font-medium text-center text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500 group',
       nonactive: 'inline-flex py-4 px-4 text-sm font-medium text-center text-gray-500 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 group'
     }
   },
   computed:{
+    getTotalHours(){
+      let total = 0;
+      this.timesheet.forEach(element => {
+        if (element.status === 'REJECTED'){
+          total = total + 0;
+        } else {
+          total = total + parseInt(element.totalhours);
+        }
+      })
+      return total;
+    },
     linkback(){
       if(this.darimana === 'pegawai'){
         return '/pegawai';
@@ -614,6 +728,13 @@ export default defineComponent({
     },
     isActiveRole(){
       if(this.role){
+        return this.active;
+      }
+      return this.nonactive;
+    },
+    isActiveTimesheet(){
+      //console.log(this.timesheet);
+      if(this.timesheettgl){
         return this.active;
       }
       return this.nonactive;
@@ -660,23 +781,33 @@ export default defineComponent({
   },
   methods:{
     toggle(action){
-      console.log(this.isHasRoles);
+      //console.log(this.isHasRoles);
       if (action === 'basic'){
         this.basic = true;
         this.detail = false;
         this.role = false;
+        this.timesheettgl = false;
       }
 
       if (action === 'detail'){
         this.basic = false;
         this.detail = true;
         this.role = false;
+        this.timesheettgl = false;
       }
 
       if (action === 'role'){
         this.basic = false;
         this.detail = false;
+        this.timesheettgl = false;
         this.role = true;
+      }
+
+      if (action === 'timesheet'){
+        this.basic = false;
+        this.detail = false;
+        this.role = false;
+        this.timesheettgl = true;
       }
     }
   }

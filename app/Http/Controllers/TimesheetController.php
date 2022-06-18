@@ -6,6 +6,7 @@ use App\Models\Assignment;
 use App\Models\Timesheet;
 use App\Models\Timesheetdetail;
 use App\Models\Timesheethistory;
+use App\Models\User;
 use App\Models\Wfassignment;
 use App\Traits\WorkflowTraits;
 use Carbon\Carbon;
@@ -107,6 +108,7 @@ class TimesheetController extends Controller
         ]);
 
         $notifMessage = 'test';
+        $statusToBeBack = '';
 
         if ($request->action == 'APPROVE'){
             //proses approve
@@ -124,6 +126,13 @@ class TimesheetController extends Controller
             $timesheetupdt = Timesheet::find($request->id);
             $timesheetupdt->status = $assignmentdetail->status;
             $timesheetupdt->isedit = false;
+            //jika status complete maka total hour akan di count.
+            if($assignmentdetail->status == 'COMPLETE'){
+                $usertoupdate = User::find($timesheetupdt->createdbyid);
+                $totalhourtimesheet = DB::table('timesheet_detail')->where('timesheet_id',$timesheetupdt->id)->sum('totalhours');
+                $usertoupdate->totalhours = $usertoupdate->totalhours + $totalhourtimesheet;
+                $usertoupdate->save();
+            }
             $timesheetupdt->save();
 
             $username = Auth::user()->name;
@@ -144,7 +153,7 @@ class TimesheetController extends Controller
                     'memo' => 'Complete Document',
                 ]);
             }
-
+            $statusToBeBack = $assignmentdetail->status;
             $notifMessage = 'Approve Successfully';
         };
 
@@ -170,25 +179,38 @@ class TimesheetController extends Controller
                 'changeby' => $username,
                 'memo' => $request->memo,
             ]);
-
+            $statusToBeBack = 'REJECTED';
             $notifMessage = 'Document Rejected Successfully';
         };
 
 
-        $timesheet = Timesheet::find($request->id);
-        $timesheetdetail = Timesheetdetail::where('timesheet_id',$request->id)->get();
-        $timesheethistory = Timesheethistory::where('ownertrxid',$request->id)->get();
-        $assignmentnow = Wfassignment::where('assignstatus', 'ACTIVE')->where('ownertrxid',$request->id)->first();
-        $assignment = Assignment::where('isactive',1)->get();
+//        $timesheet = Timesheet::find($request->id);
+//        $timesheetdetail = Timesheetdetail::where('timesheet_id',$request->id)->get();
+//        $timesheethistory = Timesheethistory::where('ownertrxid',$request->id)->get();
+//        $assignmentnow = Wfassignment::where('assignstatus', 'ACTIVE')->where('ownertrxid',$request->id)->first();
+//        $assignment = Assignment::where('isactive',1)->get();
 
-        Inertia::share('flash', session('flash', ['message' => $notifMessage]));
-        return Inertia::render('Timesheet/ApproveTimeSheet',[
-            'timesheet' => $timesheet,
-            'timesheetdetail' =>$timesheetdetail,
-            'timesheethistory' => $timesheethistory,
-            'assignment' => $assignment,
-            'assignmentnow' => $assignmentnow,
+        $assignmentnowobt = Wfassignment::where('assignstatus', 'ACTIVE')->where('ownertrxid',$request->id)->first();
+        $assignmentnow = '';
+        if($assignmentnowobt == null){
+            $assignmentnow = 'There Is No Approval';
+        } else {
+            $assignmentnow = $assignmentnowobt->assignperson;
+        }
+
+        return redirect()->back()->with('message',[
+            'status' => $statusToBeBack,
+            'message' => $notifMessage,
+            'assignment' => $assignmentnow
         ]);
+//        Inertia::share('flash', session('flash', ['message' => $notifMessage]));
+//        return Inertia::render('Timesheet/ApproveTimeSheet',[
+//            'timesheet' => $timesheet,
+//            'timesheetdetail' =>$timesheetdetail,
+//            'timesheethistory' => $timesheethistory,
+//            'assignment' => $assignment,
+//            'assignmentnow' => $assignmentnow,
+//        ]);
     }
 
     /**

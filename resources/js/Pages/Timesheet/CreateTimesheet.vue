@@ -536,6 +536,9 @@ export default defineComponent({
     },
     hold(){
       this.form.timesheetdetailsfix = this.timesheetdetails;
+      if(this.checkIfTotalHourNull()){
+        return this.notif('Error Occured','Total Hours Cannot Be Null, Please Give Value At Least 0 !!','danger');
+      };
       //fill assignment id
       if (this.form.assignment_id !== ''){
         let objetAssignment = this.assignment.find(
@@ -561,6 +564,9 @@ export default defineComponent({
     },
     submit(){
       this.form.timesheetdetailsfix = this.timesheetdetails;
+      if(this.checkIfTotalHourNull()){
+          return this.notif('Error Occured','Total Hours Cannot Be Null, Please Give Value At Least 0 !!','danger');
+      };
       //fill assignment id
       if (this.form.assignment_id !== ''){
         let objetAssignment = this.assignment.find(
@@ -598,6 +604,15 @@ export default defineComponent({
         this.attachment = true;
       }
     },
+    checkIfTotalHourNull(){
+      let isTrue = false;
+      this.timesheetdetails.forEach(element => {
+        if(element.totalhours === ''){
+          isTrue = true;
+        }
+      });
+      return isTrue;
+    }
 
   }
 })
