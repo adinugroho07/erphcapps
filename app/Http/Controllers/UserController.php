@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Fortify\PasswordValidationRules;
+use App\Models\Jatahcuti;
 use App\Models\Organization;
 use App\Models\Role;
 use App\Models\Timesheet;
@@ -134,7 +135,14 @@ class UserController extends Controller
             'totalhours' => 0
         ];
 
-        User::create($data);
+        $usercreated = User::create($data);
+
+        //insert data jatah cuti user
+        Jatahcuti::create([
+            'user_id' => $usercreated->id,
+            'cutitahunan' => 14,
+            'cutimelahirkan' => 30,
+        ]);
 
         return Redirect::route('users.index')->with('message', 'User Successfully Registered');
     }

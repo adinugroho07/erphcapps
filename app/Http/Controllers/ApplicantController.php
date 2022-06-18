@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Applicant;
 use App\Models\Assignment;
+use App\Models\Jatahcuti;
 use App\Models\Organization;
 use App\Models\Recruitmenthistory;
 use App\Models\User;
@@ -415,7 +416,14 @@ class ApplicantController extends Controller
 
         //dd($data);
         //insert data users
-        User::create($data);
+        $usercreated = User::create($data);
+
+        //insert data jatah cuti user
+        Jatahcuti::create([
+            'user_id' => $usercreated->id,
+            'cutitahunan' => 14,
+            'cutimelahirkan' => 30,
+        ]);
 
         //update status applicant to complete
         $applicant = Applicant::find($request->applicantid);
